@@ -243,7 +243,29 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   const pacotes = Array.from({ length: 22 }, () => ({ l: Math.floor(rnd() * ligacoes.length), t: rnd(), v: 0.006 + rnd() * 0.012 }));
   const pulsos = [];
 
-  let rotY = 0.6, rotX = -0.35, giro = 0.0025, pausado = false, arrastando = false, ultX = 0, ultY = 0, visivel = true, tam = 0, dpr = 1;
+  // orientação do globo guardada como matriz de rotação: permite girar livremente em qualquer direção
+  let M = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+  // gira em torno dos eixos da tela: ay = arrasto horizontal, ax = arrasto vertical
+  const girarGlobo = (ax, ay) => {
+    const ca = Math.cos(ay), sa = Math.sin(ay), cb = Math.cos(ax), sb = Math.sin(ax);
+    M = M.map((_, i) => [0, 1, 2].map((j) => {
+      const x = M[0][j], y = M[1][j], z = M[2][j];
+      const y1 = y * cb - z * sb, z1 = y * sb + z * cb;
+      if (i === 0) return x * ca + z1 * sa;
+      if (i === 1) return y1;
+      return -x * sa + z1 * ca;
+    }));
+  };
+  // corrige pequenos erros numéricos para a esfera não deformar com o tempo
+  const normalizar = () => {
+    const n = (v) => { const l = Math.hypot(v[0], v[1], v[2]); return v.map((c) => c / l); };
+    const a = n(M[0]);
+    const d = a[0] * M[1][0] + a[1] * M[1][1] + a[2] * M[1][2];
+    const b = n([M[1][0] - d * a[0], M[1][1] - d * a[1], M[1][2] - d * a[2]]);
+    M = [a, b, [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]];
+  };
+  girarGlobo(0.35, 0.6);
+  let velX = 0, velY = 0.0025, quadros = 0, pausado = false, arrastando = false, ultX = 0, ultY = 0, visivel = true, tam = 0, dpr = 1;
 
   const medir = () => {
     tam = mundo.clientWidth || 300;
@@ -256,9 +278,9 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
 
   // gira e projeta um ponto 3D na tela; devolve x, y, profundidade (0 atrás a 1 na frente) e escala
   const projetar = (p) => {
-    const cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
-    const x1 = p.x * cy + p.z * sy, z1 = -p.x * sy + p.z * cy;
-    const y2 = p.y * cx - z1 * sx, z2 = p.y * sx + z1 * cx;
+    const x1 = M[0][0] * p.x + M[0][1] * p.y + M[0][2] * p.z;
+    const y2 = M[1][0] * p.x + M[1][1] * p.y + M[1][2] * p.z;
+    const z2 = M[2][0] * p.x + M[2][1] * p.y + M[2][2] * p.z;
     const R = tam * 0.38, f = 2.6, esc = f / (f - z2);
     return { x: tam / 2 + x1 * R * esc, y: tam / 2 + y2 * R * esc, prof: (z2 + 1) / 2, esc };
   };
@@ -320,8 +342,11 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
 
   const quadro = () => {
     if (visivel) {
-      if (!arrastando && !pausado) rotY += giro;
-      giro += (0.0025 - giro) * 0.03;   // volta devagar à velocidade normal depois de arrastar
+      if (!arrastando && !pausado) girarGlobo(velX, velY);
+      // depois de soltar, o embalo diminui aos poucos até voltar à rotação lenta normal
+      velY += (0.0025 - velY) * 0.03;
+      velX *= 0.95;
+      if (++quadros % 300 === 0) normalizar();
       pacotes.forEach((k) => {
         k.t += k.v;
         if (k.t > 1) { k.t = 0; k.l = Math.floor(Math.random() * ligacoes.length); }
@@ -375,9 +400,9 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
     mundo.addEventListener('pointermove', (e) => {
       if (!arrastando) return;
       const dx = e.clientX - ultX, dy = e.clientY - ultY;
-      rotY += dx * 0.008;
-      rotX = Math.max(-1.2, Math.min(1.2, rotX + dy * 0.008));
-      giro = dx * 0.002;
+      girarGlobo(-dy * 0.008, dx * 0.008);
+      velY = dx * 0.002;
+      velX = -dy * 0.002;
       ultX = e.clientX; ultY = e.clientY;
     });
     const soltar = () => { arrastando = false; mundo.classList.remove('arrastando'); };
