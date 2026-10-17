@@ -13,8 +13,9 @@
 
 /* ============ BASE ============ */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: clip; }
-main > section { overflow-x: clip; }
+/* overflow-x: hidden é a alternativa para navegadores que não conhecem "clip" */
+html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: hidden; overflow-x: clip; }
+main > section { overflow-x: hidden; overflow-x: clip; }
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   background: var(--creme);
@@ -219,8 +220,17 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   transition: background .15s, color .15s, box-shadow .15s;
 }
 .bloco small { font-size: .7rem; color: var(--laranja); }
-.bloco:hover, .bloco:focus-visible { background: var(--laranja); color: var(--preto); box-shadow: 6px 6px 0 var(--preto); outline: none; }
-.bloco:hover small, .bloco:focus-visible small { color: var(--preto); }
+/* regras separadas: navegadores antigos ignoram a regra inteira se não conhecem :focus-visible */
+.bloco:hover { background: var(--laranja); color: var(--preto); box-shadow: 6px 6px 0 var(--preto); }
+.bloco:focus-visible { background: var(--laranja); color: var(--preto); box-shadow: 6px 6px 0 var(--preto); outline: none; }
+.bloco:hover small { color: var(--preto); }
+.bloco:focus-visible small { color: var(--preto); }
+/* posições iniciais, usadas também se o JavaScript não carregar */
+.bloco:nth-child(1) { left: 68%; top: 26%; }
+.bloco:nth-child(2) { left: 72%; top: 55%; }
+.bloco:nth-child(3) { left: 38%; top: 38%; }
+.bloco:nth-child(4) { left: 30%; top: 78%; }
+.bloco:nth-child(5) { left: 34%; top: 15%; }
 .bloco.atras { pointer-events: none; }
 .mundo-legenda {
   position: absolute; left: 50%; bottom: -.5rem; transform: translateX(-50%); white-space: nowrap;

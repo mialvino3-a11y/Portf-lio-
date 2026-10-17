@@ -165,8 +165,9 @@ const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 // Pontos (pessoas) espalhados numa esfera, ligados aos vizinhos mais próximos.
 // Pacotes de dados correm pelas conexões e os blocos de navegação giram junto.
 const mundo = document.querySelector('.mundo');
-if (mundo) {
-  const canvas = mundo.querySelector('.mundo-canvas');
+const canvasMundo = mundo && mundo.querySelector('.mundo-canvas');
+if (mundo && canvasMundo && canvasMundo.getContext) {
+  const canvas = canvasMundo;
   const ctx = canvas.getContext('2d');
   const blocos = [...mundo.querySelectorAll('.bloco')];
   const css = getComputedStyle(document.documentElement);
@@ -175,7 +176,8 @@ if (mundo) {
   const rnd = sementeAleatoria(11);
 
   // pontos distribuídos por igual na esfera (espiral de Fibonacci)
-  const N = 170;
+  // telas pequenas (celulares) usam menos pontos, para ficar leve mesmo em aparelhos simples
+  const N = mundo.clientWidth < 450 ? 120 : 170;
   const pontos = Array.from({ length: N }, (_, i) => {
     const y = 1 - (i / (N - 1)) * 2;
     const raio = Math.sqrt(1 - y * y);
@@ -201,8 +203,8 @@ if (mundo) {
   let rotY = 0.6, rotX = -0.35, giro = 0.0025, pausado = false, arrastando = false, ultX = 0, ultY = 0, visivel = true, tam = 0, dpr = 1;
 
   const medir = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    tam = mundo.clientWidth;
+    tam = mundo.clientWidth || 300;
+    dpr = Math.min(window.devicePixelRatio || 1, tam < 450 ? 1.5 : 2);
     canvas.width = tam * dpr; canvas.height = tam * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     // guarda o tamanho de cada bloco para mantê-los sempre dentro do globo/tela
@@ -291,7 +293,8 @@ if (mundo) {
   }
   medir(); desenhar();
   if (document.fonts) document.fonts.ready.then(() => { medir(); desenhar(); });
-  new ResizeObserver(() => { medir(); desenhar(); }).observe(mundo);
+  if ('ResizeObserver' in window) new ResizeObserver(() => { medir(); desenhar(); }).observe(mundo);
+  else window.addEventListener('resize', () => { medir(); desenhar(); });
 
   // o globo para de girar enquanto o mouse ou o foco está num bloco, para facilitar o clique
   // no toque não existe "passar o mouse": o globo pausa ao encostar o dedo e volta a girar pouco depois
@@ -318,7 +321,7 @@ if (mundo) {
     pulsos.push({ x: q.x, y: q.y, t: 0 });
     setTimeout(() => {
       alvo.scrollIntoView({ behavior: 'smooth' });
-      history.replaceState(null, '', b.getAttribute('href'));
+      try { history.replaceState(null, '', b.getAttribute('href')); } catch (erro) { /* alguns ambientes não permitem */ }
     }, 380);
   }));
 
@@ -340,7 +343,7 @@ if (mundo) {
     const soltar = () => { arrastando = false; mundo.classList.remove('arrastando'); };
     mundo.addEventListener('pointerup', soltar);
     mundo.addEventListener('pointercancel', soltar);
-    new IntersectionObserver(([e]) => { visivel = e.isIntersecting; }).observe(mundo);
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visivel = e.isIntersecting; }).observe(mundo);
     requestAnimationFrame(quadro);
   }
 }
