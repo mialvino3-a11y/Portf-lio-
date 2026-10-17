@@ -452,3 +452,25 @@ if (temMouse && !semAnimacao) {
     card.addEventListener('pointerleave', () => card.classList.remove('inclinando'));
   });
 }
+
+// ============ FILTRO DE PROJETOS POR ESPECIALIDADE ============
+const filtros = [...document.querySelectorAll('.filtro')];
+const projetos = [...document.querySelectorAll('.projeto[data-esp]')];
+const statusFiltro = document.querySelector('.filtro-status');
+filtros.forEach((botao) => botao.addEventListener('click', () => {
+  const alvo = botao.dataset.filtro;
+  filtros.forEach((b) => b.setAttribute('aria-pressed', String(b === botao)));
+  let visiveis = 0;
+  projetos.forEach((p) => {
+    const mostra = alvo === 'todos' || p.dataset.esp.split(' ').indexOf(alvo) !== -1;
+    p.hidden = !mostra;
+    p.classList.remove('filtrado', 'revelar');
+    if (mostra) {
+      visiveis++;
+      void p.offsetWidth;   // reinicia a animação de entrada
+      p.classList.add('filtrado', 'visivel');
+      p.querySelectorAll('.grafico').forEach((g) => g.classList.add('desenhado'));
+    }
+  });
+  if (statusFiltro) statusFiltro.textContent = `${visiveis} projeto${visiveis === 1 ? '' : 's'} em ${botao.firstChild.textContent.trim()}`;
+}));

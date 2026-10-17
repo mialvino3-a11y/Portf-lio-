@@ -141,14 +141,17 @@
     <section id="projetos" class="secao">
       <div class="container">
         <h2 class="revelar">Projetos</h2>
-        <p class="intro-secao revelar">O que eu fiz, com quais ferramentas e qual diferença fez.</p>
+        <p class="intro-secao revelar">Filtre por especialidade para ver como atuo em cada frente de dados: o que eu fiz, com quais ferramentas e qual diferença fez.</p>
+        <div class="filtros revelar" role="group" aria-label="Filtrar projetos por especialidade"><button type="button" class="filtro" data-filtro="todos" aria-pressed="true">Todos <small>9</small></button><button type="button" class="filtro" data-filtro="bi" aria-pressed="false">Painéis e BI <small>6</small></button><button type="button" class="filtro" data-filtro="analise" aria-pressed="false">Análise e estatística <small>2</small></button><button type="button" class="filtro" data-filtro="engenharia" aria-pressed="false">Engenharia e integração de dados <small>2</small></button><button type="button" class="filtro" data-filtro="pesquisa" aria-pressed="false">Pesquisa e diagnóstico <small>3</small></button><button type="button" class="filtro" data-filtro="storytelling" aria-pressed="false">Storytelling e visualização <small>2</small></button><button type="button" class="filtro" data-filtro="inovacao" aria-pressed="false">Inovação e produtos digitais <small>4</small></button></div>
+        <p class="filtro-status" aria-live="polite"></p>
         <div class="projetos">
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="bi analise inovacao">
             <div class="projeto-img"><img src="img/painel-superacao.jpg" alt="Tela inicial do painel de gestão do Programa SuperAção SP" loading="lazy"></div>
             <div class="projeto-info">
               <p class="tags">01 · Governo do Estado de SP · Assistência social</p>
               <h3>Programa SuperAção SP</h3>
+              <p class="esp-lista"><span>Painéis e BI</span><span>Análise e estatística</span><span>Inovação e produtos digitais</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>Desenvolvi painéis de gestão em Power BI e em Streamlit para acompanhar a implementação do programa.</li><li>Construí um portal de monitoramento em Streamlit que integra, em um só lugar, informações de diversas frentes da implementação.</li><li>Estruturei métricas de monitoramento a partir de estudos longitudinais e análises exploratórias da base do programa.</li><li>Conduzi estudos técnicos de dados, com análises de dispersão e estatística descritiva e robusta, que embasaram decisões estratégicas do programa.</li></ul></dd>
@@ -160,11 +163,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="bi engenharia pesquisa">
             <div class="projeto-img"><img src="img/observatorio-primeira-infancia.jpg" alt="Tela inicial do Observatório da Primeira Infância do Piauí" loading="lazy"></div>
             <div class="projeto-info">
               <p class="tags">02 · Governo do Piauí · Primeira infância</p>
               <h3>Observatório da Primeira Infância do Piauí</h3>
+              <p class="esp-lista"><span>Painéis e BI</span><span>Engenharia e integração de dados</span><span>Pesquisa e diagnóstico</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>Participei das reuniões de negócio para traduzir a demanda do cliente em requisitos de dados e de visualização.</li><li>Com base no referencial Nurturing Care (Cuidado Nutridor), que olha para o desenvolvimento infantil de forma integral, reuni em uma única visualização em Power BI os principais indicadores de cinco eixos: saúde, nutrição, educação, assistência social e segurança.</li><li>Construí essa leitura integrada mesmo sem um sistema que conectasse as bases de cada área, desenhando uma navegação que permite explorar todos os eixos em um só lugar.</li><li>Propus um índice de vulnerabilidade da primeira infância, que cruza os cinco eixos para identificar os municípios do Piauí onde as crianças acumulam piores resultados em várias dimensões ao mesmo tempo.</li><li>Ampliei o painel com novos dados públicos, como cobertura vacinal, obtidos por coleta automatizada (web scraping) em Python: requisições HTTP aos portais oficiais, leitura do HTML com BeautifulSoup e padronização com pandas, gerando indicadores alinhados às referências nacionais.</li></ul></dd>
@@ -176,11 +180,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="bi storytelling">
             <div class="projeto-img"><img src="img/observatorio-feminicidio.jpg" alt="Tela inicial do Observatório do Feminicídio do Rio de Janeiro" loading="lazy"></div>
             <div class="projeto-info">
               <p class="tags">03 · Freelance · Governo do Estado do RJ · Violência contra a mulher</p>
               <h3>Observatório do Feminicídio do Rio de Janeiro</h3>
+              <p class="esp-lista"><span>Painéis e BI</span><span>Storytelling e visualização</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>Fui responsável por toda a camada de visualização da plataforma: do storytelling à criação dos gráficos e dos botões de navegação.</li><li>Desenhei a navegação a partir do conceito de rota crítica, conduzindo o usuário pelo percurso das mulheres na rede de proteção, dos canais de atendimento à justiça.</li><li>Criei as medidas e os indicadores da plataforma, integrando dados de segurança pública, saúde, assistência social e justiça.</li><li>Produzi análises de dados e propostas de indicadores estruturadas em formato de data storytelling.</li></ul></dd>
@@ -192,11 +197,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="pesquisa storytelling inovacao">
             <div class="grafico" data-tipo="mapa" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">04 · Estado de São Paulo · Primeira infância</p>
               <h3>Datapedia da Primeira Infância de São Paulo</h3>
+              <p class="esp-lista"><span>Pesquisa e diagnóstico</span><span>Storytelling e visualização</span><span>Inovação e produtos digitais</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>A Datapedia nasceu do diagnóstico estadual da primeira infância de São Paulo, com o objetivo de reunir em um só lugar os indicadores produzidos e torná-los fáceis de consultar e reutilizar.</li><li>Consolidei indicadores geográficos sociais e de saúde em mapas interativos por município e região, com recortes de raça/cor.</li><li>Percebi que todo esse material ficaria restrito a um relatório em Word e propus um entregável a mais para o cliente.</li><li>Desenvolvi um produto em HTML que funciona como repositório navegável dos mapas, dos gráficos e das bases de dados usadas no diagnóstico.</li></ul></dd>
@@ -208,11 +214,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="bi">
             <div class="grafico" data-tipo="area" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">05 · Prefeitura de São Paulo · Primeira infância</p>
               <h3>Protocolo Integrado de Atenção à Primeiríssima Infância</h3>
+              <p class="esp-lista"><span>Painéis e BI</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>Desenvolvi o painel de acompanhamento do curso do Protocolo Integrado de Atenção à Primeiríssima Infância, com uma leitura gráfica da sua implementação.</li><li>Fui responsável pelo gerenciamento e pela análise dos dados do curso.</li><li>Acompanhei a implementação da Política Municipal Integrada pela Primeira Infância, participando das reuniões técnicas com representantes das secretarias que compõem a política, como Educação, Saúde, Assistência Social, Cultura, Segurança e Pessoa com Deficiência.</li></ul></dd>
@@ -224,11 +231,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="bi inovacao">
             <div class="grafico" data-tipo="linha" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">06 · Instituto Península · Educação · Inovação</p>
               <h3>Monitoramento do Estágio Curricular Obrigatório</h3>
+              <p class="esp-lista"><span>Painéis e BI</span><span>Inovação e produtos digitais</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>Identifiquei que o acompanhamento era feito apenas em planilhas e propus um painel como inovação para a área.</li><li>Desenvolvi o painel de monitoramento do estágio curricular obrigatório nos níveis nacional e estadual, com visualização gráfica dos dados.</li><li>Participei da elaboração de materiais didáticos, como o guia do estágio curricular obrigatório do Maranhão.</li></ul></dd>
@@ -240,11 +248,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="inovacao">
             <div class="grafico" data-tipo="rede" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">07 · Inovação · IA · Menção honrosa</p>
               <h3>IA para padronização de relatórios</h3>
+              <p class="esp-lista"><span>Inovação e produtos digitais</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd>Participei da criação de uma ferramenta de inteligência artificial para padronizar relatórios institucionais.</dd>
@@ -256,11 +265,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="engenharia bi">
             <div class="grafico" data-tipo="camadas" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">08 · Engenharia de dados</p>
               <h3>Integração de bases em arquitetura Lakehouse</h3>
+              <p class="esp-lista"><span>Engenharia e integração de dados</span><span>Painéis e BI</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd>Desenvolvi painéis sobre uma arquitetura de dados em camadas, integrando bases de diferentes fontes.</dd>
@@ -272,11 +282,12 @@
             </div>
           </article>
 
-          <article class="projeto revelar">
+          <article class="projeto revelar" data-esp="pesquisa analise">
             <div class="grafico" data-tipo="barras" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">09 · UNIFESP · PIBID/CAPES · Educação</p>
               <h3>Juventudes e o Novo Ensino Médio</h3>
+              <p class="esp-lista"><span>Pesquisa e diagnóstico</span><span>Análise e estatística</span></p>
               <dl>
                 <dt>Atuação</dt>
                 <dd><ul class="atuacao"><li>Desenvolvi o survey aplicado a estudantes do ensino médio de Guarulhos, formulando cada pergunta a partir dos objetivos de análise da pesquisa.</li><li>Tratei os dados, conduzi a análise exploratória e construí os gráficos da pesquisa.</li><li>Apresentei os resultados e as percepções dos estudantes em congresso acadêmico.</li></ul></dd>

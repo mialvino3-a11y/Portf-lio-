@@ -115,6 +115,23 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .card:hover { transform: translate(-4px, -4px) rotate(-1deg); box-shadow: 10px 10px 0 var(--preto); }
 .icone { display: block; font-family: var(--titulo); font-size: 3rem; line-height: 1; margin-bottom: 1rem; -webkit-text-stroke: 2px var(--preto); color: transparent; }
 .card:hover .icone { color: var(--amarelo); }
+.filtros { display: flex; flex-wrap: wrap; gap: .6rem; margin: -1rem 0 2.2rem; }
+.filtro {
+  font: inherit; font-weight: 700; font-size: .85rem; text-transform: uppercase; letter-spacing: .03em;
+  padding: .5rem .9rem; background: var(--branco); color: var(--preto); border: 2px solid var(--preto);
+  box-shadow: 3px 3px 0 var(--preto); cursor: pointer; transition: transform .12s, box-shadow .12s, background .12s;
+}
+.filtro small { font-size: .72rem; opacity: .65; margin-left: .2rem; }
+.filtro:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--preto); }
+.filtro:focus-visible { outline: 3px solid var(--laranja); outline-offset: 2px; }
+.filtro[aria-pressed="true"] { background: var(--preto); color: var(--amarelo); box-shadow: 3px 3px 0 var(--laranja); }
+.filtro-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.projeto[hidden] { display: none; }
+.projeto.filtrado { animation: aparecer .45s cubic-bezier(.2,.9,.3,1.2); }
+@keyframes aparecer { from { opacity: 0; transform: translateY(18px) scale(.97); } }
+.esp-lista { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin: -.1rem 0 .4rem; }
+.esp-lista span { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--preto); }
+.esp-lista span::before { content: '#'; color: var(--laranja); margin-right: .15rem; }
 .intro-secao { font-size: 1.15rem; font-weight: 500; margin: -1.5rem 0 2.5rem; }
 
 /* ============ PROJETOS ============ */
@@ -220,7 +237,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .com-efeitos .grafico.desenhado .ponto-2 { opacity: 1; transition: opacity .6s ease; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor-texto, .faixa-trilho { animation: none; }
+  .cursor-texto, .faixa-trilho, .projeto.filtrado { animation: none; }
   .titulo-3d { transition: none; }
 }
 
@@ -306,6 +323,16 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 }
 
 /* ============ CELULAR ============ */
+@media (max-width: 800px) {
+  /* filtros viram uma fileira que desliza para o lado */
+  .filtros {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    margin-inline: calc(-1 * max(16px, (100vw - 1180px) / 2)); padding: .2rem 16px .6rem;
+    scroll-snap-type: x proximity;
+  }
+  .filtros::-webkit-scrollbar { display: none; }
+  .filtro { flex: 0 0 auto; white-space: nowrap; font-size: .78rem; padding: .45rem .75rem; scroll-snap-align: start; }
+}
 @media (max-width: 800px) {
   .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
   .foto { max-width: 260px; }
