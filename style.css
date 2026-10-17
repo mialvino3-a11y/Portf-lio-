@@ -13,7 +13,8 @@
 
 /* ============ BASE ============ */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: clip; }
+main > section { overflow-x: clip; }
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   background: var(--creme);
@@ -260,8 +261,13 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 
 
 @media (max-width: 900px) {
+  /* no celular os cartões entram só subindo, sem virar em 3D */
+  .com-efeitos .card.revelar, .com-efeitos .projeto.revelar { transform: translateY(40px); }
+  .com-efeitos .card.revelar.visivel, .com-efeitos .projeto.revelar.visivel { transform: none; }
   .hero-grid { grid-template-columns: 1fr; }
   .mundo { max-width: 420px; margin-top: 1rem; }
+  .bloco { font-size: .72rem; padding: .35rem .55rem; box-shadow: 3px 3px 0 var(--laranja); }
+  .mundo-legenda { font-size: .68rem; }
 }
 
 /* ============ CELULAR ============ */

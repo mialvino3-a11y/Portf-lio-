@@ -205,6 +205,8 @@ if (mundo) {
     tam = mundo.clientWidth;
     canvas.width = tam * dpr; canvas.height = tam * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // guarda o tamanho de cada bloco para mantê-los sempre dentro do globo/tela
+    blocos.forEach((b) => { b._meiaL = b.offsetWidth / 2; b._meiaA = b.offsetHeight / 2; });
   };
 
   // gira e projeta um ponto 3D na tela; devolve x, y, profundidade (0 atrás a 1 na frente) e escala
@@ -260,9 +262,11 @@ if (mundo) {
     ancoras.forEach((p, i) => {
       const q = projetar(p);
       const b = blocos[i];
-      b.style.left = `${(q.x / tam) * 100}%`;
-      b.style.top = `${(q.y / tam) * 100}%`;
-      b.style.setProperty('--s', (0.75 + q.prof * 0.35).toFixed(3));
+      const s = 0.75 + q.prof * 0.35;
+      const mx = b._meiaL * s + 4, my = b._meiaA * s + 4;
+      b.style.left = `${Math.max(mx, Math.min(tam - mx, q.x))}px`;
+      b.style.top = `${Math.max(my, Math.min(tam - my, q.y))}px`;
+      b.style.setProperty('--s', s.toFixed(3));
       b.style.setProperty('--o', (0.35 + q.prof * 0.65).toFixed(3));
       b.style.setProperty('--z', Math.round(q.prof * 100));
       b.classList.toggle('atras', q.prof < 0.35);
@@ -282,13 +286,25 @@ if (mundo) {
     requestAnimationFrame(quadro);
   };
 
+  if (!window.matchMedia('(hover: hover)').matches) {
+    mundo.querySelector('.mundo-legenda').textContent = 'Arraste para girar · toque num bloco de dados';
+  }
   medir(); desenhar();
+  if (document.fonts) document.fonts.ready.then(() => { medir(); desenhar(); });
   new ResizeObserver(() => { medir(); desenhar(); }).observe(mundo);
 
   // o globo para de girar enquanto o mouse ou o foco está num bloco, para facilitar o clique
+  // no toque não existe "passar o mouse": o globo pausa ao encostar o dedo e volta a girar pouco depois
+  let retomar;
+  const pausarPorToque = () => {
+    pausado = true;
+    clearTimeout(retomar);
+    retomar = setTimeout(() => { pausado = false; }, 2500);
+  };
+  mundo.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'mouse') pausarPorToque(); });
   blocos.forEach((b) => {
-    b.addEventListener('pointerenter', () => { pausado = true; });
-    b.addEventListener('pointerleave', () => { pausado = false; });
+    b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') pausado = true; });
+    b.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') pausado = false; });
     b.addEventListener('focus', () => { pausado = true; });
     b.addEventListener('blur', () => { pausado = false; });
   });
