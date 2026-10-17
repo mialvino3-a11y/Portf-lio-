@@ -16,6 +16,25 @@ document.getElementById('ano').textContent = new Date().getFullYear();
 // Quem pediu "menos movimento" no sistema não vê as animações
 const semAnimacao = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// ============ NAVEGAÇÃO INTERNA ============
+// Rola só esta página até a seção. (O jeito padrão dos navegadores também rola a página
+// "de fora" quando o site está dentro de outra, o que dava a impressão de travar.)
+const irPara = (hash) => {
+  const alvo = document.querySelector(hash);
+  if (!alvo) return;
+  const topo = document.querySelector('.topo');
+  const y = alvo.getBoundingClientRect().top + window.pageYOffset - (topo ? topo.offsetHeight : 0);
+  try { window.scrollTo({ top: y, behavior: semAnimacao ? 'auto' : 'smooth' }); }
+  catch (erro) { window.scrollTo(0, y); }
+  try { history.replaceState(null, '', hash); } catch (erro) { /* alguns ambientes não permitem */ }
+};
+document.addEventListener('click', (e) => {
+  const link = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!link || link.classList.contains('bloco') || link.getAttribute('href').length < 2) return;
+  e.preventDefault();
+  irPara(link.getAttribute('href'));
+});
+
 // Gerador de números "aleatórios" sempre iguais para a mesma semente,
 // para os gráficos não mudarem a cada visita
 const sementeAleatoria = (semente) => () => {
@@ -314,15 +333,12 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
 
   // clicar num bloco: pulso de dados e depois rola até a seção
   blocos.forEach((b, i) => b.addEventListener('click', (e) => {
-    const alvo = document.querySelector(b.getAttribute('href'));
-    if (!alvo || semAnimacao) return;
     e.preventDefault();
+    const hash = b.getAttribute('href');
+    if (semAnimacao) { irPara(hash); return; }
     const q = projetar(ancoras[i]);
     pulsos.push({ x: q.x, y: q.y, t: 0 });
-    setTimeout(() => {
-      alvo.scrollIntoView({ behavior: 'smooth' });
-      try { history.replaceState(null, '', b.getAttribute('href')); } catch (erro) { /* alguns ambientes não permitem */ }
-    }, 380);
+    setTimeout(() => irPara(hash), 380);
   }));
 
   if (!semAnimacao) {

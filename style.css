@@ -14,7 +14,7 @@
 /* ============ BASE ============ */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 /* overflow-x: hidden é a alternativa para navegadores que não conhecem "clip" */
-html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: hidden; overflow-x: clip; }
+html { scroll-padding-top: 72px; overflow-x: hidden; overflow-x: clip; }
 main > section { overflow-x: hidden; overflow-x: clip; }
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
