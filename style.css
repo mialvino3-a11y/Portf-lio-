@@ -107,7 +107,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .ficha dt { background: var(--amarelo); padding: .7rem 1rem; font-weight: 700; text-transform: uppercase; font-size: .85rem; border-right: var(--borda); }
 .ficha dd { padding: .7rem 1rem; font-weight: 500; }
 
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.6rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1.6rem; }
 .card {
   background: var(--branco); padding: 2rem; border: var(--borda); box-shadow: var(--sombra);
   transition: transform .2s, box-shadow .2s;
@@ -118,14 +118,17 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .intro-secao { font-size: 1.15rem; font-weight: 500; margin: -1.5rem 0 2.5rem; }
 
 /* ============ PROJETOS ============ */
-.projetos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+/* min(...) e min-width: 0 impedem que a imagem (bem maior que a tela) estique o cartão no Safari */
+.projetos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 2rem; }
 .projeto {
   background: var(--branco); border: var(--borda); box-shadow: var(--sombra);
   transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column;
 }
 .projeto:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0 var(--amarelo), 10px 10px 0 3px var(--preto); }
-.projeto-img { aspect-ratio: 16 / 9; border-bottom: var(--borda); overflow: hidden; background: var(--creme); }
-.projeto-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .5s ease; }
+.projeto { min-width: 0; }
+.card { min-width: 0; }
+.projeto-img { position: relative; width: 100%; aspect-ratio: 16 / 9; border-bottom: var(--borda); overflow: hidden; background: var(--creme); }
+.projeto-img img { position: absolute; inset: 0; width: 100%; max-width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .5s ease; }
 .projeto:hover .projeto-img img { transform: scale(1.05); }
 .grafico { aspect-ratio: 16 / 9; border-bottom: var(--borda); background: var(--amarelo); }
 .grafico svg { width: 100%; height: 100%; display: block; }
@@ -248,12 +251,14 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 }
 .titulo-3d .tarja { text-shadow: none; }
 
-/* cartões com profundidade: inclinam com o mouse e o conteúdo "salta" */
-.card, .projeto { transform-style: preserve-3d; }
-.card .icone { transform: translateZ(50px); }
-.card h3 { transform: translateZ(30px); }
-.projeto-img, .grafico { transform: translateZ(25px); }
-.tags { transform: translateZ(35px); }
+/* cartões com profundidade: inclinam com o mouse e o conteúdo "salta".
+   Só em aparelhos com mouse (no toque não há inclinação, e o Safari do iPhone
+   deixa de cortar as imagens quando existe profundidade 3D) */
+@media (hover: hover) and (pointer: fine) {
+  .card { transform-style: preserve-3d; }
+  .card .icone { transform: translateZ(50px); }
+  .card h3 { transform: translateZ(30px); }
+}
 .card.inclinando, .projeto.inclinando {
   transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.02);
   box-shadow: var(--sx) var(--sy) 0 var(--preto);
