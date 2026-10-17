@@ -1,27 +1,28 @@
 /* ============ CORES — mude aqui para trocar o visual do site todo ============ */
 :root {
-  --fundo: #faf8f5;
-  --fundo-alt: #f1ede6;
-  --texto: #1f1d1a;
-  --texto-suave: #6b665e;
-  --destaque: #c2571a;
-  --destaque-escuro: #9a4212;
-  --borda: #e2dcd2;
+  --fundo: #f7f9f9;
+  --fundo-alt: #eaf0f0;
+  --texto: #142426;
+  --texto-suave: #556769;
+  --destaque: #0f6b6b;
+  --destaque-escuro: #0a5050;
+  --borda: #d6e1e1;
   --card: #ffffff;
   --raio: 14px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fundo: #161513;
-    --fundo-alt: #1e1c19;
-    --texto: #f1ede6;
-    --texto-suave: #a8a196;
-    --destaque: #e8813f;
-    --destaque-escuro: #f39a5d;
-    --borda: #2f2c27;
-    --card: #23211d;
+    --fundo: #0f1718;
+    --fundo-alt: #152022;
+    --texto: #e8f0f0;
+    --texto-suave: #9db0b1;
+    --destaque: #3fb8b0;
+    --destaque-escuro: #62cec7;
+    --borda: #263537;
+    --card: #1a2729;
   }
+  .btn:not(.btn-contorno) { color: #0f1718 !important; }
 }
 
 /* ============ BASE ============ */
@@ -87,7 +88,7 @@ h3 { font-size: 1.15rem; margin-bottom: .4rem; }
 }
 .foto-placeholder {
   display: grid; place-items: center;
-  background: linear-gradient(135deg, var(--destaque), #e8b04f);
+  background: linear-gradient(135deg, #0f6b6b, #4fb3a9);
   color: #fff; font-family: 'Playfair Display', serif; font-size: 5rem;
 }
 
@@ -104,6 +105,8 @@ h3 { font-size: 1.15rem; margin-bottom: .4rem; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
 .card { background: var(--card); padding: 2rem; border-radius: var(--raio); border: 1px solid var(--borda); }
 .card p { color: var(--texto-suave); }
+.chips { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; margin-top: 2rem; }
+.chips li { background: var(--card); border: 1px solid var(--borda); border-radius: 999px; padding: .4rem 1rem; font-size: .9rem; font-weight: 500; }
 .icone { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: var(--fundo-alt); color: var(--destaque); font-size: 1.3rem; margin-bottom: 1rem; }
 
 /* ============ PROJETOS ============ */
@@ -115,10 +118,12 @@ h3 { font-size: 1.15rem; margin-bottom: .4rem; }
   color: #fff; font-weight: 600; font-size: 1.2rem;
 }
 .projeto-img img { width: 100%; height: 100%; object-fit: cover; }
-.cor-1 { background: linear-gradient(135deg, #c2571a, #e8b04f); }
+.cor-1 { background: linear-gradient(135deg, #0f6b6b, #4fb3a9); }
 .cor-2 { background: linear-gradient(135deg, #2d5f5d, #6fa39b); }
 .cor-3 { background: linear-gradient(135deg, #3b3a63, #8a7fc0); }
 .cor-4 { background: linear-gradient(135deg, #7a2e3b, #d0717f); }
+.cor-5 { background: linear-gradient(135deg, #1c3f6e, #5d8ac4); }
+.cor-6 { background: linear-gradient(135deg, #a65a14, #e3a24f); }
 .projeto-info { padding: 1.5rem; }
 .projeto-info p { color: var(--texto-suave); }
 .tags { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .4rem; }
