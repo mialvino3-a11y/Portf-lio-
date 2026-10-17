@@ -139,6 +139,13 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .grafico .ponto-2 { fill: var(--branco); stroke: var(--preto); stroke-width: 2; }
 .grafico .barra { fill: var(--preto); }
 .grafico .barra-destaque { fill: var(--branco); stroke: var(--preto); stroke-width: 2; }
+.grafico .hex { stroke: var(--preto); stroke-width: 1.2; }
+.grafico .hex-0 { fill: var(--branco); }
+.grafico .hex-1 { fill: var(--creme); }
+.grafico .hex-2 { fill: var(--laranja); }
+.grafico .hex-3 { fill: var(--preto); }
+.com-efeitos .grafico .hex { opacity: 0; }
+.com-efeitos .grafico.desenhado .hex { opacity: 1; transition: opacity .8s ease; }
 .grafico .ligacao { stroke: var(--preto); stroke-width: 1.2; opacity: .4; }
 .projeto-info { padding: 1.4rem 1.5rem 1.7rem; }
 .tags {
@@ -157,16 +164,23 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 
 /* ============ TRAJETÓRIA ============ */
 .linha-tempo { list-style: none; border-top: var(--borda); }
-.linha-tempo li {
+.linha-tempo > li {
   display: grid; grid-template-columns: 11rem 1fr; gap: 2rem; align-items: baseline;
   padding: 1.6rem 0; border-bottom: var(--borda); transition: background .2s, padding .2s;
 }
-.linha-tempo li:hover { background: var(--amarelo); padding-inline: 1rem; }
+.linha-tempo > li:hover { background: var(--amarelo); padding-inline: 1rem; }
 .periodo {
   justify-self: start; font-weight: 700; text-transform: uppercase; font-size: .85rem;
   border: 2px solid var(--preto); padding: .15rem .6rem; background: var(--branco);
 }
 .linha-tempo p { color: var(--cinza); }
+.traj-corpo { display: grid; gap: .55rem; min-width: 0; }
+.traj-corpo h3 { margin-bottom: 0; }
+.traj-rotulo { color: var(--preto) !important; font-weight: 700; text-transform: uppercase; font-size: .78rem; letter-spacing: .06em; margin-top: .4rem; }
+.traj-lista { list-style: none; display: grid; gap: .35rem; color: var(--cinza); }
+.traj-lista li { position: relative; padding-left: 1.4rem; }
+.traj-lista li::before { content: '→'; position: absolute; left: 0; font-weight: 700; color: var(--preto); }
+.traj-lista strong { color: var(--preto); }
 
 /* ============ CONTATO ============ */
 .contato { background: var(--preto); color: var(--branco); padding: clamp(5rem, 10vw, 8rem) 0; }
@@ -302,7 +316,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   }
   .menu.aberto { display: flex; }
   .projetos { grid-template-columns: 1fr; }
-  .linha-tempo li { grid-template-columns: 1fr; gap: .6rem; }
+  .linha-tempo > li { grid-template-columns: 1fr; gap: .6rem; }
   .ficha div { grid-template-columns: 1fr; }
   .ficha dt { border-right: 0; border-bottom: var(--borda); }
   .faixa-trilho { font-size: 1.2rem; }

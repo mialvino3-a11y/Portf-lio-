@@ -95,6 +95,23 @@ const desenhos = {
     }));
     nos.forEach((n, i) => svg.append(el('circle', { cx: n[0], cy: n[1], r: i % 5 ? 3 : 5, class: i % 5 ? 'ponto' : 'ponto-2' })));
   },
+  mapa(svg, r) {
+    // mosaico hexagonal, como um mapa de municípios colorido por indicador
+    const raio = 11, w = Math.sqrt(3) * raio, classes = ['hex-0', 'hex-1', 'hex-2', 'hex-3'];
+    for (let lin = 0; lin < 9; lin++) {
+      for (let col = 0; col < 15; col++) {
+        const cx = 12 + col * w + (lin % 2 ? w / 2 : 0), cy = 10 + lin * raio * 1.5;
+        const dx = (cx - 150) / 140, dy = (cy - 65) / 60;
+        if (dx * dx + dy * dy > 1 + r() * 0.25) continue;   // recorte com contorno irregular
+        const pts = Array.from({ length: 6 }, (_, k) => {
+          const ang = (Math.PI / 3) * k + Math.PI / 6;
+          return `${(cx + raio * 0.92 * Math.cos(ang)).toFixed(1)},${(cy + raio * 0.92 * Math.sin(ang)).toFixed(1)}`;
+        }).join(' ');
+        const valor = Math.min(3, Math.floor(r() * 3.2 + (1 - Math.hypot(dx, dy)) * 1.2));
+        svg.append(el('polygon', { points: pts, class: `hex ${classes[valor]}` }));
+      }
+    }
+  },
   camadas(svg) {
     // dados brutos → tratados → prontos para análise
     const colunas = [[50, 8], [150, 5], [250, 3]];
