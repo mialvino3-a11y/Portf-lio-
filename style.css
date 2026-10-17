@@ -189,6 +189,9 @@ figcaption { margin-top: .6rem; font-size: .8rem; color: var(--texto-suave); tex
     var(--fundo);
   background-size: 16px 16px;
 }
+.projeto-img { aspect-ratio: 16 / 9; border-bottom: 1px solid var(--borda); background: var(--fundo-alt); overflow: hidden; }
+.projeto-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .5s ease; }
+.projeto:hover .projeto-img img { transform: scale(1.04); }
 .grafico svg { width: 100%; height: 100%; display: block; }
 .grafico .traco { fill: none; stroke: var(--destaque); stroke-width: 2; }
 .grafico .traco-2 { fill: none; stroke: var(--ciano); stroke-width: 1.5; stroke-dasharray: 4 4; }
