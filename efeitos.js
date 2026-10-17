@@ -357,7 +357,7 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   };
 
   if (!window.matchMedia('(hover: hover)').matches) {
-    mundo.querySelector('.mundo-legenda').textContent = 'Arraste para girar · toque num bloco de dados';
+    mundo.querySelector('.mundo-legenda').textContent = 'Gire o globo e toque numa especialidade';
   }
   medir(); desenhar();
   if (document.fonts) document.fonts.ready.then(() => { medir(); desenhar(); });
@@ -384,6 +384,7 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   blocos.forEach((b, i) => b.addEventListener('click', (e) => {
     e.preventDefault();
     const hash = b.getAttribute('href');
+    if (b.dataset.filtro && typeof filtrarProjetos === 'function') filtrarProjetos(b.dataset.filtro);
     if (semAnimacao) { irPara(hash); return; }
     const q = projetar(ancoras[i]);
     pulsos.push({ x: q.x, y: q.y, t: 0 });
@@ -453,16 +454,17 @@ if (temMouse && !semAnimacao) {
   });
 }
 
-// ============ FILTRO DE PROJETOS POR ESPECIALIDADE ============
-const filtros = [...document.querySelectorAll('.filtro')];
+// ============ PROJETOS POR ESPECIALIDADE (escolhida no globo) ============
+const NOMES_ESP = {
+  bi: 'Painéis e BI', analise: 'Análise e estatística', engenharia: 'Engenharia e integração de dados',
+  pesquisa: 'Pesquisa e diagnóstico', storytelling: 'Storytelling e visualização', inovacao: 'Inovação e produtos digitais',
+};
 const projetos = [...document.querySelectorAll('.projeto[data-esp]')];
-const statusFiltro = document.querySelector('.filtro-status');
-filtros.forEach((botao) => botao.addEventListener('click', () => {
-  const alvo = botao.dataset.filtro;
-  filtros.forEach((b) => b.setAttribute('aria-pressed', String(b === botao)));
+const faixaFiltro = document.querySelector('.filtro-ativo');
+function filtrarProjetos(esp) {
   let visiveis = 0;
   projetos.forEach((p) => {
-    const mostra = alvo === 'todos' || p.dataset.esp.split(' ').indexOf(alvo) !== -1;
+    const mostra = esp === 'todos' || p.dataset.esp.split(' ').indexOf(esp) !== -1;
     p.hidden = !mostra;
     p.classList.remove('filtrado', 'revelar');
     if (mostra) {
@@ -472,5 +474,14 @@ filtros.forEach((botao) => botao.addEventListener('click', () => {
       p.querySelectorAll('.grafico').forEach((g) => g.classList.add('desenhado'));
     }
   });
-  if (statusFiltro) statusFiltro.textContent = `${visiveis} projeto${visiveis === 1 ? '' : 's'} em ${botao.firstChild.textContent.trim()}`;
-}));
+  if (!faixaFiltro) return;
+  faixaFiltro.hidden = esp === 'todos';
+  if (esp !== 'todos') {
+    faixaFiltro.querySelector('strong').textContent = NOMES_ESP[esp] || esp;
+    faixaFiltro.querySelector('span').textContent = `${visiveis} projeto${visiveis === 1 ? '' : 's'}`;
+  }
+}
+const botaoLimpar = document.querySelector('.filtro-limpar');
+if (botaoLimpar) botaoLimpar.addEventListener('click', () => filtrarProjetos('todos'));
+// links comuns para "Projetos" (menu e quadradinhos) mostram todos os projetos
+document.querySelectorAll('a[href="#projetos"]:not(.bloco)').forEach((a) => a.addEventListener('click', () => filtrarProjetos('todos')));
