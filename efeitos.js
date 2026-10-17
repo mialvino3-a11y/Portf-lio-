@@ -141,7 +141,8 @@ if (!semAnimacao && 'IntersectionObserver' in window) {
         alvo.style.transitionDelay = '';
       }, 1400);
     });
-  }, { threshold: 0.15 });
+  // dispara assim que o elemento começa a entrar na tela (funciona até para cartões muito altos)
+  }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
   // pequeno atraso entre irmãos, para aparecerem em cascata
   document.querySelectorAll('.revelar').forEach((alvo) => {
     const irmaos = [...alvo.parentElement.children].filter(c => c.classList.contains('revelar'));
@@ -149,6 +150,12 @@ if (!semAnimacao && 'IntersectionObserver' in window) {
     observador.observe(alvo);
   });
   document.querySelectorAll('.grafico').forEach((g) => observador.observe(g));
+  // garantia: se algo ainda estiver escondido depois de passar pela tela, mostra de qualquer jeito
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.revelar:not(.visivel)').forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visivel');
+    });
+  }, { passive: true });
 }
 
 // ============ TEXTO DIGITANDO ============

@@ -149,6 +149,9 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .projeto-info dt { font-weight: 700; text-transform: uppercase; font-size: .78rem; letter-spacing: .06em; margin-top: .8rem; }
 .projeto-info dt::before { content: '■ '; color: var(--amarelo); -webkit-text-stroke: 1px var(--preto); }
 .projeto-info dd { color: var(--cinza); }
+.atuacao { list-style: none; display: grid; gap: .4rem; }
+.atuacao li { position: relative; padding-left: 1.4rem; }
+.atuacao li::before { content: '→'; position: absolute; left: 0; font-weight: 700; color: var(--preto); }
 .ferramentas { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .2rem; }
 .ferramentas span { border: 2px solid var(--preto); padding: .05rem .55rem; font-size: .82rem; font-weight: 700; color: var(--preto); background: var(--creme); }
 
@@ -268,7 +271,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 
 /* cartões entram virando em 3D */
 .com-efeitos .card.revelar, .com-efeitos .projeto.revelar {
-  transform: perspective(900px) rotateX(40deg) translateY(60px);
+  transform: perspective(900px) rotateX(18deg) translateY(50px);
   transform-origin: top center;
   transition: opacity .8s ease, transform .9s cubic-bezier(.2,.9,.3,1.15);
 }
