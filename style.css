@@ -67,28 +67,13 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   display: inline-block; font-weight: 700; text-transform: uppercase; font-size: .9rem; letter-spacing: .05em;
   border: var(--borda); background: var(--branco); padding: .3rem .8rem;
 }
-.hero h1 { font-size: clamp(3.4rem, 13vw, 9.5rem); margin: 1.5rem 0 1.8rem; }
+.hero h1 { font-size: clamp(3.4rem, 11vw, 7.2rem); margin: 1.5rem 0 1.8rem; }
 .tarja { background: var(--preto); color: var(--amarelo); padding: 0 .12em; display: inline-block; transform: rotate(-1.5deg); }
 .cargo { font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 500; max-width: 40rem; }
 .digitando { margin-top: 1rem; font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; }
 .palavra { background: var(--preto); color: var(--amarelo); padding: 0 .3rem; }
 .cursor-texto { animation: piscar 1s steps(1) infinite; font-weight: 700; }
 @keyframes piscar { 50% { opacity: 0; } }
-
-/* selo girando */
-.selo {
-  position: relative; width: 200px; height: 200px; transform: rotate(8deg);
-  border-radius: 50%; background: var(--laranja); border: var(--borda); box-shadow: var(--sombra);
-  display: grid; place-items: center; text-decoration: none; transition: transform .2s;
-}
-.selo:hover { transform: rotate(8deg) scale(1.06); }
-.selo svg { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); animation: girar 14s linear infinite; }
-.selo text { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; text-transform: uppercase; fill: var(--preto); }
-.selo-centro {
-  width: 64px; height: 64px; border-radius: 50%; background: var(--preto); color: var(--amarelo);
-  display: grid; place-items: center; font-size: 1.8rem; font-weight: 700;
-}
-@keyframes girar { to { transform: rotate(360deg); } }
 
 /* ============ FAIXA DE FERRAMENTAS ============ */
 .faixa { overflow: hidden; background: var(--preto); color: var(--branco); padding: 1.1rem 0; border-bottom: var(--borda); }
@@ -211,8 +196,35 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .com-efeitos .grafico.desenhado .ponto-2 { opacity: 1; transition: opacity .6s ease; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor-texto, .faixa-trilho, .selo svg { animation: none; }
+  .cursor-texto, .faixa-trilho { animation: none; }
   .titulo-3d { transition: none; }
+}
+
+/* ============ CAPA: MUNDO DE DADOS ============ */
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 2rem; align-items: center; }
+.hero-texto { min-width: 0; }
+.mundo { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1; justify-self: center; touch-action: pan-y; cursor: grab; }
+.mundo.arrastando { cursor: grabbing; }
+.mundo-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.blocos { position: absolute; inset: 0; pointer-events: none; }
+.bloco {
+  position: absolute; left: 0; top: 0; pointer-events: auto;
+  display: flex; align-items: center; gap: .45rem; white-space: nowrap;
+  padding: .45rem .75rem; background: var(--preto); color: var(--amarelo);
+  border: 2px solid var(--preto); box-shadow: 4px 4px 0 var(--laranja);
+  font-weight: 700; text-transform: uppercase; font-size: .85rem; letter-spacing: .03em; text-decoration: none;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  opacity: var(--o, 1); z-index: var(--z, 1);
+  transition: background .15s, color .15s, box-shadow .15s;
+}
+.bloco small { font-size: .7rem; color: var(--laranja); }
+.bloco:hover, .bloco:focus-visible { background: var(--laranja); color: var(--preto); box-shadow: 6px 6px 0 var(--preto); outline: none; }
+.bloco:hover small, .bloco:focus-visible small { color: var(--preto); }
+.bloco.atras { pointer-events: none; }
+.mundo-legenda {
+  position: absolute; left: 50%; bottom: -.5rem; transform: translateX(-50%); white-space: nowrap;
+  font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  background: var(--branco); border: 2px solid var(--preto); padding: .2rem .6rem;
 }
 
 /* ============ EFEITOS 3D ============ */
@@ -224,29 +236,6 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   will-change: transform;
 }
 .titulo-3d .tarja { text-shadow: none; }
-
-/* cubo girando (dá para arrastar) */
-.hero-3d {
-  position: absolute; right: 2%; top: 0; display: flex; flex-direction: column; align-items: center; gap: 3.5rem;
-}
-.cena { --lado: 170px; width: var(--lado); height: var(--lado); perspective: 800px; cursor: grab; touch-action: none; position: relative; }
-.cena:active { cursor: grabbing; }
-.cena::after {
-  content: ''; position: absolute; left: 10%; right: 10%; bottom: -46px; height: 18px;
-  border-radius: 50%; background: rgb(0 0 0 / .25); filter: blur(6px);
-}
-.cubo { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transform: rotateX(-22deg) rotateY(35deg); }
-.face {
-  position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
-  border: 3px solid var(--preto); font-family: var(--titulo); font-size: calc(var(--lado) * .14);
-  text-transform: uppercase; backface-visibility: hidden; user-select: none;
-}
-.f-frente   { transform: translateZ(calc(var(--lado) / 2)); background: var(--preto); color: var(--amarelo); }
-.f-tras     { transform: rotateY(180deg) translateZ(calc(var(--lado) / 2)); background: var(--laranja); }
-.f-direita  { transform: rotateY(90deg) translateZ(calc(var(--lado) / 2)); background: var(--branco); }
-.f-esquerda { transform: rotateY(-90deg) translateZ(calc(var(--lado) / 2)); background: var(--creme); }
-.f-topo     { transform: rotateX(90deg) translateZ(calc(var(--lado) / 2)); background: var(--amarelo); }
-.f-base     { transform: rotateX(-90deg) translateZ(calc(var(--lado) / 2)); background: var(--preto); color: var(--branco); }
 
 /* cartões com profundidade: inclinam com o mouse e o conteúdo "salta" */
 .card, .projeto { transform-style: preserve-3d; }
@@ -269,10 +258,10 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 }
 .com-efeitos .card.revelar.visivel, .com-efeitos .projeto.revelar.visivel { transform: perspective(900px) rotateX(0) translateY(0); }
 
-@media (max-width: 1000px) {
-  .hero-3d { position: static; flex-direction: row; justify-content: flex-start; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; }
-  .cena { --lado: 120px; margin-left: 24px; }
-  .cena::after { bottom: -34px; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .mundo { max-width: 420px; margin-top: 1rem; }
 }
 
 /* ============ CELULAR ============ */
@@ -287,8 +276,6 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   }
   .menu.aberto { display: flex; }
   .projetos { grid-template-columns: 1fr; }
-  .selo { width: 140px; height: 140px; }
-  .selo-centro { width: 50px; height: 50px; }
   .linha-tempo li { grid-template-columns: 1fr; gap: .6rem; }
   .ficha div { grid-template-columns: 1fr; }
   .ficha dt { border-right: 0; border-bottom: var(--borda); }

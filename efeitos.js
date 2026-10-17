@@ -161,36 +161,172 @@ atualizarBarra();
 // ============ EFEITOS 3D ============
 const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// Cubo: gira sozinho e pode ser arrastado com o mouse ou o dedo
-const cena = document.querySelector('.cena');
-const cubo = document.querySelector('.cubo');
-if (cena && cubo && !semAnimacao) {
-  let rx = -22, ry = 35, velocidade = 0, arrastando = false, ultimoX = 0, ultimoY = 0, visivel = true;
-  const girar = () => {
-    if (visivel && !arrastando) {
-      ry += 0.35 + velocidade;
-      velocidade *= 0.95;
-    }
-    cubo.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    requestAnimationFrame(girar);
+// ============ CAPA: MUNDO SOCIAL FEITO DE DADOS ============
+// Pontos (pessoas) espalhados numa esfera, ligados aos vizinhos mais próximos.
+// Pacotes de dados correm pelas conexões e os blocos de navegação giram junto.
+const mundo = document.querySelector('.mundo');
+if (mundo) {
+  const canvas = mundo.querySelector('.mundo-canvas');
+  const ctx = canvas.getContext('2d');
+  const blocos = [...mundo.querySelectorAll('.bloco')];
+  const css = getComputedStyle(document.documentElement);
+  const PRETO = css.getPropertyValue('--preto').trim();
+  const LARANJA = css.getPropertyValue('--laranja').trim();
+  const rnd = sementeAleatoria(11);
+
+  // pontos distribuídos por igual na esfera (espiral de Fibonacci)
+  const N = 170;
+  const pontos = Array.from({ length: N }, (_, i) => {
+    const y = 1 - (i / (N - 1)) * 2;
+    const raio = Math.sqrt(1 - y * y);
+    const a = i * Math.PI * (3 - Math.sqrt(5));
+    return { x: Math.cos(a) * raio, y, z: Math.sin(a) * raio, destaque: rnd() > 0.88 };
+  });
+  // cada ponto se liga aos 3 vizinhos mais próximos
+  const ligacoes = [];
+  pontos.forEach((p, i) => {
+    pontos.map((q, j) => [j, (p.x - q.x) ** 2 + (p.y - q.y) ** 2 + (p.z - q.z) ** 2])
+      .filter(([j]) => j > i).sort((u, v) => u[1] - v[1]).slice(0, 3)
+      .forEach(([j]) => ligacoes.push([i, j]));
+  });
+  // posição de cada bloco na esfera (latitude/longitude em graus)
+  const ancoras = blocos.map((b) => {
+    const lat = (+b.dataset.lat * Math.PI) / 180, lon = (+b.dataset.lon * Math.PI) / 180;
+    return { x: Math.cos(lat) * Math.sin(lon), y: -Math.sin(lat), z: Math.cos(lat) * Math.cos(lon) };
+  });
+  // pacotes de dados viajando pelas conexões
+  const pacotes = Array.from({ length: 22 }, () => ({ l: Math.floor(rnd() * ligacoes.length), t: rnd(), v: 0.006 + rnd() * 0.012 }));
+  const pulsos = [];
+
+  let rotY = 0.6, rotX = -0.35, giro = 0.0025, pausado = false, arrastando = false, ultX = 0, ultY = 0, visivel = true, tam = 0, dpr = 1;
+
+  const medir = () => {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    tam = mundo.clientWidth;
+    canvas.width = tam * dpr; canvas.height = tam * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
-  cena.addEventListener('pointerdown', (e) => {
-    arrastando = true; ultimoX = e.clientX; ultimoY = e.clientY;
-    cena.setPointerCapture(e.pointerId);
+
+  // gira e projeta um ponto 3D na tela; devolve x, y, profundidade (0 atrás a 1 na frente) e escala
+  const projetar = (p) => {
+    const cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
+    const x1 = p.x * cy + p.z * sy, z1 = -p.x * sy + p.z * cy;
+    const y2 = p.y * cx - z1 * sx, z2 = p.y * sx + z1 * cx;
+    const R = tam * 0.38, f = 2.6, esc = f / (f - z2);
+    return { x: tam / 2 + x1 * R * esc, y: tam / 2 + y2 * R * esc, prof: (z2 + 1) / 2, esc };
+  };
+
+  const desenhar = () => {
+    ctx.clearRect(0, 0, tam, tam);
+    const P = pontos.map(projetar);
+    // contorno do globo
+    ctx.globalAlpha = 0.12; ctx.fillStyle = PRETO;
+    ctx.beginPath(); ctx.arc(tam / 2, tam / 2, tam * 0.385, 0, Math.PI * 2); ctx.fill();
+    ctx.lineWidth = 1;
+    ligacoes.forEach(([i, j]) => {
+      const a = P[i], b = P[j];
+      ctx.globalAlpha = 0.08 + Math.min(a.prof, b.prof) * 0.55;
+      ctx.strokeStyle = PRETO;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    });
+    pontos.forEach((p, i) => {
+      const q = P[i];
+      ctx.globalAlpha = 0.25 + q.prof * 0.75;
+      ctx.fillStyle = p.destaque ? LARANJA : PRETO;
+      const r = (p.destaque ? 4 : 2.4) * q.esc;
+      if (p.destaque) { ctx.fillRect(q.x - r, q.y - r, r * 2, r * 2); }
+      else { ctx.beginPath(); ctx.arc(q.x, q.y, r, 0, Math.PI * 2); ctx.fill(); }
+    });
+    // pacotes de dados
+    pacotes.forEach((k) => {
+      const [i, j] = ligacoes[k.l];
+      const a = P[i], b = P[j];
+      const x = a.x + (b.x - a.x) * k.t, y = a.y + (b.y - a.y) * k.t;
+      ctx.globalAlpha = 0.3 + Math.min(a.prof, b.prof) * 0.7;
+      ctx.fillStyle = LARANJA; ctx.strokeStyle = PRETO;
+      ctx.fillRect(x - 3, y - 3, 6, 6); ctx.strokeRect(x - 3, y - 3, 6, 6);
+    });
+    // pulsos de clique
+    for (let n = pulsos.length - 1; n >= 0; n--) {
+      const pu = pulsos[n];
+      pu.t += 0.04;
+      if (pu.t >= 1) { pulsos.splice(n, 1); continue; }
+      ctx.globalAlpha = 1 - pu.t; ctx.strokeStyle = LARANJA; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.arc(pu.x, pu.y, 10 + pu.t * 120, 0, Math.PI * 2); ctx.stroke();
+      ctx.lineWidth = 1;
+    }
+    ctx.globalAlpha = 1;
+    // blocos de navegação acompanham a rotação
+    ancoras.forEach((p, i) => {
+      const q = projetar(p);
+      const b = blocos[i];
+      b.style.left = `${(q.x / tam) * 100}%`;
+      b.style.top = `${(q.y / tam) * 100}%`;
+      b.style.setProperty('--s', (0.75 + q.prof * 0.35).toFixed(3));
+      b.style.setProperty('--o', (0.35 + q.prof * 0.65).toFixed(3));
+      b.style.setProperty('--z', Math.round(q.prof * 100));
+      b.classList.toggle('atras', q.prof < 0.35);
+    });
+  };
+
+  const quadro = () => {
+    if (visivel) {
+      if (!arrastando && !pausado) rotY += giro;
+      giro += (0.0025 - giro) * 0.03;   // volta devagar à velocidade normal depois de arrastar
+      pacotes.forEach((k) => {
+        k.t += k.v;
+        if (k.t > 1) { k.t = 0; k.l = Math.floor(Math.random() * ligacoes.length); }
+      });
+      desenhar();
+    }
+    requestAnimationFrame(quadro);
+  };
+
+  medir(); desenhar();
+  new ResizeObserver(() => { medir(); desenhar(); }).observe(mundo);
+
+  // o globo para de girar enquanto o mouse ou o foco está num bloco, para facilitar o clique
+  blocos.forEach((b) => {
+    b.addEventListener('pointerenter', () => { pausado = true; });
+    b.addEventListener('pointerleave', () => { pausado = false; });
+    b.addEventListener('focus', () => { pausado = true; });
+    b.addEventListener('blur', () => { pausado = false; });
   });
-  cena.addEventListener('pointermove', (e) => {
-    if (!arrastando) return;
-    const dx = e.clientX - ultimoX, dy = e.clientY - ultimoY;
-    ry += dx * 0.6;
-    rx = Math.max(-80, Math.min(80, rx - dy * 0.6));
-    velocidade = dx * 0.3;
-    ultimoX = e.clientX; ultimoY = e.clientY;
-  });
-  const soltar = () => { arrastando = false; };
-  cena.addEventListener('pointerup', soltar);
-  cena.addEventListener('pointercancel', soltar);
-  new IntersectionObserver(([e]) => { visivel = e.isIntersecting; }).observe(cena);
-  requestAnimationFrame(girar);
+
+  // clicar num bloco: pulso de dados e depois rola até a seção
+  blocos.forEach((b, i) => b.addEventListener('click', (e) => {
+    const alvo = document.querySelector(b.getAttribute('href'));
+    if (!alvo || semAnimacao) return;
+    e.preventDefault();
+    const q = projetar(ancoras[i]);
+    pulsos.push({ x: q.x, y: q.y, t: 0 });
+    setTimeout(() => {
+      alvo.scrollIntoView({ behavior: 'smooth' });
+      history.replaceState(null, '', b.getAttribute('href'));
+    }, 380);
+  }));
+
+  if (!semAnimacao) {
+    mundo.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.bloco')) return;
+      arrastando = true; ultX = e.clientX; ultY = e.clientY;
+      mundo.classList.add('arrastando');
+      mundo.setPointerCapture(e.pointerId);
+    });
+    mundo.addEventListener('pointermove', (e) => {
+      if (!arrastando) return;
+      const dx = e.clientX - ultX, dy = e.clientY - ultY;
+      rotY += dx * 0.008;
+      rotX = Math.max(-1.2, Math.min(1.2, rotX + dy * 0.008));
+      giro = dx * 0.002;
+      ultX = e.clientX; ultY = e.clientY;
+    });
+    const soltar = () => { arrastando = false; mundo.classList.remove('arrastando'); };
+    mundo.addEventListener('pointerup', soltar);
+    mundo.addEventListener('pointercancel', soltar);
+    new IntersectionObserver(([e]) => { visivel = e.isIntersecting; }).observe(mundo);
+    requestAnimationFrame(quadro);
+  }
 }
 
 if (temMouse && !semAnimacao) {

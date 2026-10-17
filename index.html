@@ -33,38 +33,32 @@
 
     <!-- ============ INÍCIO ============ -->
     <section id="inicio" class="hero">
-      <div class="container">
-        <p class="etiqueta revelar">Analista de dados · Cientista social</p>
-        <h1 class="titulo-3d revelar">Dados<br>com <span class="tarja">impacto</span></h1>
-        <p class="cargo revelar">Indicadores, painéis e storytelling com dados para gerar e medir impacto, social e de negócio.</p>
-        <p class="digitando revelar" aria-label="Transformo dados em decisões, indicadores, painéis, histórias e impacto">
-          Transformo dados em <span class="palavra" data-palavras="decisões|indicadores|painéis|histórias|impacto">decisões</span><span class="cursor-texto" aria-hidden="true">_</span>
-        </p>
-        <div class="acoes revelar">
-          <a href="#projetos" class="btn">Ver projetos ↓</a>
-          <a href="#contato" class="btn btn-contorno">Fale comigo</a>
+      <div class="container hero-grid">
+        <div class="hero-texto">
+          <p class="etiqueta revelar">Analista de dados · Cientista social</p>
+          <h1 class="titulo-3d revelar">Dados<br>com <span class="tarja">impacto</span></h1>
+          <p class="cargo revelar">Indicadores, painéis e storytelling com dados para gerar e medir impacto, social e de negócio.</p>
+          <p class="digitando revelar" aria-label="Transformo dados em decisões, indicadores, painéis, histórias e impacto">
+            Transformo dados em <span class="palavra" data-palavras="decisões|indicadores|painéis|histórias|impacto">decisões</span><span class="cursor-texto" aria-hidden="true">_</span>
+          </p>
+          <div class="acoes revelar">
+            <a href="#projetos" class="btn">Ver projetos ↓</a>
+            <a href="#contato" class="btn btn-contorno">Fale comigo</a>
+          </div>
         </div>
 
-        <!-- elementos 3D: cubo girando e selo -->
-        <div class="hero-3d">
-          <div class="cena" aria-hidden="true">
-            <div class="cubo">
-              <span class="face f-frente">Dados</span>
-              <span class="face f-tras">Impacto</span>
-              <span class="face f-direita">Python</span>
-              <span class="face f-esquerda">Power BI</span>
-              <span class="face f-topo">SQL</span>
-              <span class="face f-base">IA</span>
-            </div>
-          </div>
-          <!-- selo girando -->
-          <a href="#contato" class="selo" aria-label="Disponível para projetos">
-            <svg viewBox="0 0 200 200" aria-hidden="true">
-              <defs><path id="circulo" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
-              <text><textPath href="#circulo" textLength="448" lengthAdjust="spacing">disponível para projetos ✦ disponível para projetos ✦</textPath></text>
-            </svg>
-            <span class="selo-centro">→</span>
-          </a>
+        <!-- mundo social feito de dados: pessoas (pontos) ligadas por conexões.
+             Os blocos giram junto com o globo e levam para cada seção. -->
+        <div class="mundo">
+          <canvas class="mundo-canvas" aria-hidden="true"></canvas>
+          <nav class="blocos" aria-label="Navegue pelo mundo de dados">
+            <a href="#sobre" class="bloco" data-lat="38" data-lon="-35"><small>01</small>Sobre</a>
+            <a href="#competencias" class="bloco" data-lat="-10" data-lon="45"><small>02</small>Competências</a>
+            <a href="#projetos" class="bloco" data-lat="12" data-lon="140"><small>03</small>Projetos</a>
+            <a href="#trajetoria" class="bloco" data-lat="-40" data-lon="-120"><small>04</small>Trajetória</a>
+            <a href="#contato" class="bloco" data-lat="55" data-lon="-170"><small>05</small>Contato</a>
+          </nav>
+          <p class="mundo-legenda">Arraste para girar · clique num bloco de dados</p>
         </div>
       </div>
     </section>
