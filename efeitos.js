@@ -15,8 +15,6 @@ document.getElementById('ano').textContent = new Date().getFullYear();
 
 // Quem pediu "menos movimento" no sistema não vê as animações
 const semAnimacao = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const cor = (nome) => getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
 
 // Gerador de números "aleatórios" sempre iguais para a mesma semente,
 // para os gráficos não mudarem a cada visita
@@ -53,14 +51,6 @@ const desenhos = {
     const pts = Array.from({ length: 16 }, (_, i) => { y -= r() * 9; return [10 + i * 18.7, y]; });
     svg.append(el('path', { d: `${caminho(pts)} L290,120 L10,120 Z`, class: 'preenche' }));
     svg.append(el('path', { d: caminho(pts), class: 'traco' }));
-  },
-  dispersao(svg, r) {
-    for (let i = 0; i < 42; i++) {
-      const x = 15 + r() * 270;
-      const y = 112 - (x / 300) * 80 + (r() - 0.5) * 36;
-      svg.append(el('circle', { cx: x, cy: y, r: 2.8, class: r() > 0.8 ? 'ponto-2' : 'ponto' }));
-    }
-    svg.append(el('path', { d: 'M12,112 L288,32', class: 'traco-2' }));
   },
   barras(svg, r) {
     const n = 12, larg = 280 / n;
@@ -167,115 +157,3 @@ const atualizarBarra = () => {
 };
 window.addEventListener('scroll', atualizarBarra, { passive: true });
 atualizarBarra();
-
-// ============ REDE DE DADOS NO TOPO ============
-const canvas = document.querySelector('.rede');
-const hero = document.querySelector('.hero');
-if (canvas && canvas.getContext) {
-  const ctx = canvas.getContext('2d');
-  const mouse = { x: -999, y: -999 };
-  let nos = [], larg = 0, alt = 0, rodando = true;
-
-  const iniciar = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    larg = hero.clientWidth; alt = hero.clientHeight;
-    canvas.width = larg * dpr; canvas.height = alt * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const r = sementeAleatoria(42);
-    const qtd = Math.min(70, Math.round((larg * alt) / 16000));
-    nos = Array.from({ length: qtd }, () => ({
-      x: r() * larg, y: r() * alt,
-      vx: (r() - 0.5) * 0.35, vy: (r() - 0.5) * 0.35,
-      destaque: r() > 0.85,
-    }));
-  };
-
-  const desenhar = () => {
-    const azul = cor('--destaque'), ciano = cor('--ciano'), suave = cor('--texto-suave');
-    ctx.clearRect(0, 0, larg, alt);
-    const alcance = 130;
-    for (let i = 0; i < nos.length; i++) {
-      const a = nos[i];
-      for (let j = i + 1; j < nos.length; j++) {
-        const b = nos[j];
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < alcance) {
-          ctx.globalAlpha = (1 - d / alcance) * 0.35;
-          ctx.strokeStyle = suave;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        }
-      }
-      // ligações com o cursor
-      const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-      if (dm < 170) {
-        ctx.globalAlpha = (1 - dm / 170) * 0.8;
-        ctx.strokeStyle = azul;
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
-      }
-    }
-    nos.forEach((n) => {
-      ctx.globalAlpha = n.destaque ? 0.9 : 0.55;
-      ctx.fillStyle = n.destaque ? ciano : azul;
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.destaque ? 3.2 : 2.2, 0, Math.PI * 2); ctx.fill();
-    });
-    ctx.globalAlpha = 1;
-  };
-
-  const mover = () => {
-    nos.forEach((n) => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > larg) n.vx *= -1;
-      if (n.y < 0 || n.y > alt) n.vy *= -1;
-    });
-  };
-
-  const quadro = () => {
-    if (rodando) { mover(); desenhar(); }
-    requestAnimationFrame(quadro);
-  };
-
-  iniciar();
-  desenhar();
-  if (!semAnimacao) {
-    // só anima enquanto o topo está visível, para poupar bateria
-    new IntersectionObserver(([e]) => { rodando = e.isIntersecting; }).observe(hero);
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-    });
-    hero.addEventListener('pointerleave', () => { mouse.x = mouse.y = -999; });
-    requestAnimationFrame(quadro);
-  }
-  let espera;
-  window.addEventListener('resize', () => {
-    clearTimeout(espera);
-    espera = setTimeout(() => { iniciar(); desenhar(); }, 200);
-  });
-}
-
-if (temMouse && !semAnimacao) {
-  // ============ COORDENADAS DO CURSOR ============
-  const caixa = document.querySelector('.coordenadas');
-  const cx = document.getElementById('cx'), cy = document.getElementById('cy');
-  window.addEventListener('pointermove', (e) => {
-    cx.textContent = (e.clientX / window.innerWidth).toFixed(3);
-    cy.textContent = (1 - e.clientY / window.innerHeight).toFixed(3);
-    caixa.classList.add('ativa');
-  }, { passive: true });
-  document.addEventListener('pointerleave', () => caixa.classList.remove('ativa'));
-
-  // ============ CARTÕES QUE INCLINAM EM 3D ============
-  document.querySelectorAll('.projeto, .card').forEach((card) => {
-    card.addEventListener('pointermove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      card.style.setProperty('--rx', `${(0.5 - y) * 6}deg`);
-      card.style.setProperty('--ry', `${(x - 0.5) * 6}deg`);
-      card.style.setProperty('--mx', `${x * 100}%`);
-      card.style.setProperty('--my', `${y * 100}%`);
-      card.classList.add('inclinando');
-    });
-    card.addEventListener('pointerleave', () => card.classList.remove('inclinando'));
-  });
-}
