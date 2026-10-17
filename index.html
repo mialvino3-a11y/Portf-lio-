@@ -12,6 +12,10 @@
 </head>
 <body>
 
+  <!-- Barra de progresso da leitura e brilho que segue o mouse -->
+  <div class="progresso" aria-hidden="true"></div>
+  <div class="brilho-cursor" aria-hidden="true"></div>
+
   <!-- ============ MENU ============ -->
   <header class="topo">
     <nav class="container nav">
@@ -31,47 +35,63 @@
 
     <!-- ============ INÍCIO ============ -->
     <section id="inicio" class="hero">
+      <!-- bolhinhas flutuantes decorativas -->
+      <div class="bolhas" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
       <div class="container hero-grid">
         <div>
-          <p class="etiqueta">Olá, eu sou</p>
-          <h1>Mirella Alvino</h1>
-          <p class="cargo">Analista de Dados · Políticas Públicas e Desenvolvimento Social</p>
-          <p class="resumo">
-            Cientista social que transforma dados públicos em painéis, indicadores e relatórios
-            que ajudam governos a acompanhar e melhorar políticas sociais.
+          <p class="etiqueta revelar">Olá, eu sou</p>
+          <h1 class="revelar"><span class="nome-brilho">Mirella Alvino</span></h1>
+          <p class="cargo revelar">Analista de Dados · Políticas Públicas e Desenvolvimento Social</p>
+          <p class="digitando revelar" aria-label="Transformo dados em painéis, indicadores, histórias e decisões">
+            Transformo dados em <span class="palavra" data-palavras="painéis|indicadores|histórias|decisões">painéis</span><span class="cursor-texto" aria-hidden="true">|</span>
           </p>
-          <div class="acoes">
+          <div class="acoes revelar">
             <a href="#projetos" class="btn">Ver projetos</a>
             <a href="#contato" class="btn btn-contorno">Fale comigo</a>
           </div>
         </div>
-        <div class="foto">
+        <div class="foto revelar">
           <!-- Troque pela sua foto: coloque o arquivo na pasta "img" e use <img src="img/foto.jpg" alt="Mirella Alvino"> -->
           <div class="foto-placeholder">MA</div>
+          <span class="selo selo-1">📊 Dados</span>
+          <span class="selo selo-2">🌱 Impacto social</span>
         </div>
       </div>
     </section>
 
+    <!-- ============ FAIXA DE FERRAMENTAS ============ -->
+    <div class="faixa" aria-label="Ferramentas que uso">
+      <div class="faixa-trilho">
+        <span>Power BI</span><span>✿</span><span>Python</span><span>✿</span><span>Streamlit</span><span>✿</span>
+        <span>SQL</span><span>✿</span><span>Lakehouse</span><span>✿</span><span>DATASUS</span><span>✿</span>
+        <span>CadÚnico</span><span>✿</span><span>Storytelling com dados</span><span>✿</span><span>IA aplicada</span><span>✿</span>
+        <span aria-hidden="true">Power BI</span><span aria-hidden="true">✿</span><span aria-hidden="true">Python</span><span aria-hidden="true">✿</span><span aria-hidden="true">Streamlit</span><span aria-hidden="true">✿</span>
+        <span aria-hidden="true">SQL</span><span aria-hidden="true">✿</span><span aria-hidden="true">Lakehouse</span><span aria-hidden="true">✿</span><span aria-hidden="true">DATASUS</span><span aria-hidden="true">✿</span>
+        <span aria-hidden="true">CadÚnico</span><span aria-hidden="true">✿</span><span aria-hidden="true">Storytelling com dados</span><span aria-hidden="true">✿</span><span aria-hidden="true">IA aplicada</span><span aria-hidden="true">✿</span>
+      </div>
+    </div>
+
     <!-- ============ SOBRE ============ -->
     <section id="sobre" class="secao">
       <div class="container sobre-grid">
-        <h2>Sobre mim</h2>
+        <h2 class="revelar">Sobre mim</h2>
         <div>
-          <p>
+          <p class="revelar">
             Sou licenciada em Ciências Sociais pela UNIFESP e hoje atuo como Técnica de Projetos
-            na FGV Projetos, onde desenvolvo análises de dados, painéis e relatórios institucionais
-            para os governos estaduais de São Paulo e do Rio de Janeiro.
+            na FGV Projetos, desenvolvendo análises de dados, painéis e relatórios institucionais
+            para governos estaduais.
           </p>
-          <p>
+          <p class="revelar">
             Minha formação me ajuda a olhar para os números sem perder de vista as pessoas por trás
-            deles. Trabalho principalmente com primeira infância, assistência social e educação,
-            unindo rigor técnico, como bases do DATASUS e do CadÚnico, modelagem de dados e Power BI,
-            à articulação entre equipes, secretarias e gestores.
+            deles. Uno rigor técnico na organização e análise de bases públicas à articulação entre
+            equipes, secretarias e gestores, para que os dados virem decisões melhores.
           </p>
-          <ul class="numeros">
-            <li><strong>61</strong><span>indicadores mapeados no<br>Observatório do Piauí</span></li>
-            <li><strong>26</strong><span>diretorias regionais<br>comparadas (DRADS)</span></li>
-            <li><strong>2</strong><span>governos estaduais<br>atendidos (SP e RJ)</span></li>
+          <ul class="areas">
+            <li class="revelar"><span>🍼</span>Primeira infância</li>
+            <li class="revelar"><span>🤝</span>Assistência social</li>
+            <li class="revelar"><span>📚</span>Educação</li>
           </ul>
         </div>
       </div>
@@ -80,92 +100,130 @@
     <!-- ============ COMPETÊNCIAS ============ -->
     <section id="competencias" class="secao secao-alt">
       <div class="container">
-        <h2>O que eu faço</h2>
+        <h2 class="revelar">O que eu faço</h2>
         <div class="cards">
-          <article class="card">
+          <article class="card revelar">
             <span class="icone">▤</span>
             <h3>Painéis e BI</h3>
-            <p>Painéis em Power BI e Streamlit para monitorar programas sociais e apoiar a tomada de decisão de gestores.</p>
+            <p>Painéis para monitorar programas sociais e apoiar a tomada de decisão de gestores.</p>
           </article>
-          <article class="card">
+          <article class="card revelar">
             <span class="icone">◎</span>
             <h3>Indicadores e monitoramento</h3>
-            <p>Construção e revisão de indicadores, metodologias de acompanhamento e análise de bases públicas como SINASC, SIM, CadÚnico e RMA.</p>
+            <p>Construção e revisão de indicadores, metodologias de acompanhamento e análise de bases públicas.</p>
           </article>
-          <article class="card">
+          <article class="card revelar">
             <span class="icone">⇄</span>
             <h3>Articulação e storytelling</h3>
-            <p>Tradução de dados em narrativas e apresentações executivas, e alinhamento entre Saúde, Assistência Social e Educação.</p>
+            <p>Tradução de dados em narrativas e apresentações executivas, e alinhamento entre diferentes áreas do governo.</p>
           </article>
         </div>
-        <ul class="chips" aria-label="Ferramentas">
-          <li>Power BI</li>
-          <li>Python</li>
-          <li>Streamlit</li>
-          <li>SQL / PostgreSQL</li>
-          <li>Arquitetura Lakehouse</li>
-          <li>DATASUS (SIM, SINASC, SISVAN)</li>
-          <li>CadÚnico</li>
-          <li>Pesquisa qualitativa</li>
-          <li>IA aplicada</li>
-        </ul>
       </div>
     </section>
 
     <!-- ============ PROJETOS ============ -->
     <section id="projetos" class="secao">
       <div class="container">
-        <h2>Projetos em destaque</h2>
+        <h2 class="revelar">Projetos em destaque</h2>
+        <p class="intro-secao revelar">Para cada projeto: o que eu fiz, com quais ferramentas e qual diferença fez.</p>
         <div class="projetos">
-          <article class="projeto">
-            <div class="projeto-img cor-1">SuperAção SP</div>
+
+          <article class="projeto revelar">
+            <div class="projeto-img cor-1"><span>💗</span></div>
             <div class="projeto-info">
-              <p class="tags">FGV Projetos · SEDS/SP</p>
-              <h3>Monitoramento do SuperAção SP</h3>
-              <p>Painéis em Power BI e monitoramento do sistema SIGMA para o programa estadual de superação da pobreza. Participei dos produtos 2.1 a 2.3, do alinhamento metodológico com a secretaria e da revisão de um dos indicadores do programa.</p>
+              <p class="tags">Assistência social · Governo estadual</p>
+              <h3>Monitoramento de programa de superação da pobreza</h3>
+              <dl>
+                <dt>🎯 Atuação</dt>
+                <dd>Construí painéis de acompanhamento, monitorei a execução do programa e participei do alinhamento metodológico e da revisão de indicadores junto à secretaria.</dd>
+                <dt>🛠 Ferramentas</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Python</span><span>Streamlit</span></dd>
+                <dt>✨ Impacto</dt>
+                <dd>Acompanhamento contínuo do programa e indicadores mais consistentes para apoiar as decisões da gestão.</dd>
+              </dl>
             </div>
           </article>
-          <article class="projeto">
-            <div class="projeto-img cor-2">Observatório PI</div>
+
+          <article class="projeto revelar">
+            <div class="projeto-img cor-2"><span>🧸</span></div>
             <div class="projeto-info">
-              <p class="tags">FGV Projetos · Primeira infância</p>
-              <h3>Observatório da Primeira Infância do Piauí</h3>
-              <p>Mapeamento de 61 indicadores e storytelling do painel, a partir de bases públicas de saúde (SIM, SINASC, SISVAN), com comparação dos municípios com o estado e o Brasil.</p>
-              <a href="https://github.com/mialvino3-a11y/observatorio-primeira-infancia-piaui" class="link" target="_blank" rel="noopener">Ver código →</a>
+              <p class="tags">Primeira infância · Observatório estadual</p>
+              <h3>Observatório da primeira infância</h3>
+              <dl>
+                <dt>🎯 Atuação</dt>
+                <dd>Mapeei indicadores, tratei bases públicas de saúde e construí a narrativa (storytelling) do painel.</dd>
+                <dt>🛠 Ferramentas</dt>
+                <dd class="ferramentas"><span>Python</span><span>Streamlit</span><span>PostgreSQL</span><span>DATASUS</span></dd>
+                <dt>✨ Impacto</dt>
+                <dd>Dados de saúde da primeira infância reunidos em um painel acessível, que ajuda gestores municipais a comparar realidades e priorizar ações.</dd>
+              </dl>
             </div>
           </article>
-          <article class="projeto">
-            <div class="projeto-img cor-3">FGV Norma</div>
+
+          <article class="projeto revelar">
+            <div class="projeto-img cor-3"><span>🤖</span></div>
             <div class="projeto-info">
-              <p class="tags">FGV Projetos · IA · Menção Honrosa</p>
-              <h3>FGV Norma</h3>
-              <p>Ferramenta de inteligência artificial para padronizar relatórios institucionais. O projeto recebeu Menção Honrosa.</p>
+              <p class="tags">Inovação · IA · Menção Honrosa 🏅</p>
+              <h3>IA para padronizar relatórios</h3>
+              <dl>
+                <dt>🎯 Atuação</dt>
+                <dd>Participei da criação de uma ferramenta de inteligência artificial para padronizar relatórios institucionais.</dd>
+                <dt>🛠 Ferramentas</dt>
+                <dd class="ferramentas"><span>IA generativa</span><span>Automação</span></dd>
+                <dt>✨ Impacto</dt>
+                <dd>Relatórios mais padronizados e ágeis. O projeto foi reconhecido com Menção Honrosa.</dd>
+              </dl>
             </div>
           </article>
-          <article class="projeto">
-            <div class="projeto-img cor-4">Lakehouse</div>
+
+          <article class="projeto revelar">
+            <div class="projeto-img cor-4"><span>🗂️</span></div>
             <div class="projeto-info">
-              <p class="tags">FGV Projetos · SEDS/SP · Engenharia de dados</p>
-              <h3>Lakehouse Medallion</h3>
-              <p>Painéis construídos sobre uma arquitetura de dados em camadas (bronze, prata e ouro), integrando CadÚnico, PMAS, RMA e SINASC.</p>
+              <p class="tags">Engenharia de dados · Assistência social</p>
+              <h3>Integração de bases sociais em arquitetura Lakehouse</h3>
+              <dl>
+                <dt>🎯 Atuação</dt>
+                <dd>Desenvolvi painéis sobre uma arquitetura de dados em camadas, integrando bases da assistência social e da saúde.</dd>
+                <dt>🛠 Ferramentas</dt>
+                <dd class="ferramentas"><span>Lakehouse</span><span>SQL</span><span>Power BI</span><span>CadÚnico</span></dd>
+                <dt>✨ Impacto</dt>
+                <dd>Informações de diferentes fontes organizadas em um só lugar, com mais confiança e agilidade para as análises.</dd>
+              </dl>
             </div>
           </article>
-          <article class="projeto">
-            <div class="projeto-img cor-5">PAT Estadual</div>
+
+          <article class="projeto revelar">
+            <div class="projeto-img cor-5"><span>🗺️</span></div>
             <div class="projeto-info">
-              <p class="tags">FGV Projetos · Apresentação executiva</p>
-              <h3>PAT Estadual: comparativo das 26 DRADS</h3>
-              <p>Apresentação executiva comparando as 26 Diretorias Regionais de Assistência e Desenvolvimento Social do estado de São Paulo.</p>
+              <p class="tags">Assistência social · Análise regional</p>
+              <h3>Diagnóstico comparativo entre regiões</h3>
+              <dl>
+                <dt>🎯 Atuação</dt>
+                <dd>Analisei dados das diretorias regionais e construí uma apresentação executiva comparando seus resultados.</dd>
+                <dt>🛠 Ferramentas</dt>
+                <dd class="ferramentas"><span>Análise de dados</span><span>Visualização</span><span>Apresentação executiva</span></dd>
+                <dt>✨ Impacto</dt>
+                <dd>Uma visão clara das diferenças entre regiões para orientar o planejamento da secretaria.</dd>
+              </dl>
             </div>
           </article>
-          <article class="projeto">
-            <div class="projeto-img cor-6">Primeiríssima Infância</div>
+
+          <article class="projeto revelar">
+            <div class="projeto-img cor-6"><span>🌱</span></div>
             <div class="projeto-info">
-              <p class="tags">Prefeitura de São Paulo · SEPE</p>
-              <h3>Protocolo Integrado da Primeiríssima Infância</h3>
-              <p>Criação do monitoramento em Power BI do curso do Protocolo Integrado de Atenção à Primeiríssima Infância, com articulação entre Saúde, Assistência Social e Educação.</p>
+              <p class="tags">Primeira infância · Prefeitura de São Paulo</p>
+              <h3>Monitoramento de formação intersetorial</h3>
+              <dl>
+                <dt>🎯 Atuação</dt>
+                <dd>Criei o monitoramento de um curso de atenção à primeira infância e fiz a articulação entre Saúde, Assistência Social e Educação.</dd>
+                <dt>🛠 Ferramentas</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Articulação intersetorial</span></dd>
+                <dt>✨ Impacto</dt>
+                <dd>Acompanhamento da formação em tempo real e três áreas do governo olhando para os mesmos dados.</dd>
+              </dl>
             </div>
           </article>
+
         </div>
       </div>
     </section>
@@ -173,29 +231,29 @@
     <!-- ============ TRAJETÓRIA ============ -->
     <section id="trajetoria" class="secao secao-alt">
       <div class="container">
-        <h2>Trajetória</h2>
+        <h2 class="revelar">Trajetória</h2>
         <ol class="linha-tempo">
-          <li>
+          <li class="revelar">
             <span class="periodo">Atual</span>
             <h3>Técnica de Projetos I · FGV Projetos</h3>
-            <p>Análise de dados, painéis e relatórios institucionais para os governos de SP e RJ, em políticas públicas e desenvolvimento social.</p>
+            <p>Análise de dados, painéis e relatórios institucionais para governos estaduais, em políticas públicas e desenvolvimento social.</p>
           </li>
-          <li>
+          <li class="revelar">
             <span class="periodo">Primeira infância</span>
             <h3>SEPE · Prefeitura de São Paulo</h3>
-            <p>Monitoramento em Power BI do Protocolo Integrado de Atenção à Primeiríssima Infância e articulação intersetorial.</p>
+            <p>Monitoramento em Power BI e articulação entre Saúde, Assistência Social e Educação.</p>
           </li>
-          <li>
+          <li class="revelar">
             <span class="periodo">Educação</span>
             <h3>Movimento Profissão Docente · Instituto Península</h3>
             <p>Alinhamentos com gestores estaduais sobre metas e indicadores.</p>
           </li>
-          <li>
+          <li class="revelar">
             <span class="periodo">Nov/2022 — Abr/2024</span>
             <h3>Bolsista PIBID/CAPES · Sociologia, UNIFESP</h3>
             <p>Pesquisa qualitativa com estudantes do ensino médio.</p>
           </li>
-          <li>
+          <li class="revelar">
             <span class="periodo">Formação</span>
             <h3>Licenciatura em Ciências Sociais · UNIFESP</h3>
             <p>TCC sobre relações étnico-raciais e representações em obras didáticas.</p>
@@ -206,7 +264,7 @@
 
     <!-- ============ CONTATO ============ -->
     <section id="contato" class="secao contato">
-      <div class="container contato-box">
+      <div class="container contato-box revelar">
         <h2>Vamos conversar?</h2>
         <p>Tenho interesse em projetos e oportunidades em dados para políticas públicas e impacto social.</p>
         <div class="acoes">
@@ -222,23 +280,9 @@
   </main>
 
   <footer class="rodape">
-    <p>© <span id="ano">2026</span> Mirella Alvino · São Paulo, SP</p>
+    <p>© <span id="ano">2026</span> Mirella Alvino · São Paulo, SP · feito com ♡</p>
   </footer>
 
-  <script>
-    // Menu no celular
-    const btn = document.querySelector('.menu-btn');
-    const menu = document.querySelector('.menu');
-    btn.addEventListener('click', () => {
-      const aberto = menu.classList.toggle('aberto');
-      btn.setAttribute('aria-expanded', aberto);
-    });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      menu.classList.remove('aberto');
-      btn.setAttribute('aria-expanded', false);
-    }));
-    // Ano automático no rodapé
-    document.getElementById('ano').textContent = new Date().getFullYear();
-  </script>
+  <script src="efeitos.js"></script>
 </body>
 </html>
