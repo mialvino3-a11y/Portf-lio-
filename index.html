@@ -3,29 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mirella Alvino — Dados e Políticas Públicas</title>
-  <meta name="description" content="Portfólio de Mirella Alvino: análise de dados, painéis e indicadores para políticas públicas e desenvolvimento social.">
+  <title>Mirella Alvino — Dados e Impacto</title>
+  <meta name="description" content="Portfólio de Mirella Alvino: análise de dados, indicadores e painéis para gerar e medir impacto social e de negócio.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Barra de progresso da leitura e brilho que segue o mouse -->
+  <!-- Barra de progresso da leitura e leitura de coordenadas do cursor -->
   <div class="progresso" aria-hidden="true"></div>
-  <div class="brilho-cursor" aria-hidden="true"></div>
+  <div class="coordenadas" aria-hidden="true">x <span id="cx">0.000</span> · y <span id="cy">0.000</span></div>
 
   <!-- ============ MENU ============ -->
   <header class="topo">
     <nav class="container nav">
-      <a href="#inicio" class="logo">Mirella Alvino</a>
+      <a href="#inicio" class="logo"><span class="logo-marca">M/A</span> Mirella Alvino</a>
       <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false">☰</button>
       <ul class="menu">
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#competencias">Competências</a></li>
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#trajetoria">Trajetória</a></li>
+        <li><a href="#sobre"><span class="num">01</span>Sobre</a></li>
+        <li><a href="#competencias"><span class="num">02</span>Competências</a></li>
+        <li><a href="#projetos"><span class="num">03</span>Projetos</a></li>
+        <li><a href="#trajetoria"><span class="num">04</span>Trajetória</a></li>
         <li><a href="#contato" class="btn btn-pequeno">Contato</a></li>
       </ul>
     </nav>
@@ -35,64 +35,65 @@
 
     <!-- ============ INÍCIO ============ -->
     <section id="inicio" class="hero">
-      <!-- bolhinhas flutuantes decorativas -->
-      <div class="bolhas" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
+      <canvas class="rede" aria-hidden="true"></canvas>
       <div class="container hero-grid">
         <div>
-          <p class="etiqueta revelar">Olá, eu sou</p>
-          <h1 class="revelar"><span class="nome-brilho">Mirella Alvino</span></h1>
-          <p class="cargo revelar">Analista de Dados · Políticas Públicas e Desenvolvimento Social</p>
-          <p class="digitando revelar" aria-label="Transformo dados em painéis, indicadores, histórias e decisões">
-            Transformo dados em <span class="palavra" data-palavras="painéis|indicadores|histórias|decisões">painéis</span><span class="cursor-texto" aria-hidden="true">|</span>
+          <p class="etiqueta revelar">// analista de dados</p>
+          <h1 class="revelar">Mirella Alvino</h1>
+          <p class="cargo revelar">Dados, indicadores e mensuração de impacto, social e de negócio.</p>
+          <p class="terminal revelar" aria-label="Transformando dados em insights, indicadores, painéis, decisões e impacto">
+            <span class="prompt">&gt;</span> transformando dados em <span class="palavra" data-palavras="insights|indicadores|painéis|decisões|impacto">insights</span><span class="cursor-texto" aria-hidden="true">▍</span>
           </p>
           <div class="acoes revelar">
-            <a href="#projetos" class="btn">Ver projetos</a>
+            <a href="#projetos" class="btn">Ver projetos →</a>
             <a href="#contato" class="btn btn-contorno">Fale comigo</a>
           </div>
         </div>
-        <div class="foto revelar">
-          <!-- Troque pela sua foto: coloque o arquivo na pasta "img" e use <img src="img/foto.jpg" alt="Mirella Alvino"> -->
-          <div class="foto-placeholder">MA</div>
-          <span class="selo selo-1">📊 Dados</span>
-          <span class="selo selo-2">🌱 Impacto social</span>
-        </div>
+        <figure class="foto revelar">
+          <div class="moldura">
+            <!-- Troque pela sua foto: coloque o arquivo na pasta "img" e use <img src="img/foto.jpg" alt="Mirella Alvino"> -->
+            <div class="foto-placeholder">MA</div>
+          </div>
+          <figcaption>fig. 01 — a analista · São Paulo, SP</figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- ============ FAIXA DE FERRAMENTAS ============ -->
     <div class="faixa" aria-label="Ferramentas que uso">
       <div class="faixa-trilho">
-        <span>Power BI</span><span>✿</span><span>Python</span><span>✿</span><span>Streamlit</span><span>✿</span>
-        <span>SQL</span><span>✿</span><span>Lakehouse</span><span>✿</span><span>DATASUS</span><span>✿</span>
-        <span>CadÚnico</span><span>✿</span><span>Storytelling com dados</span><span>✿</span><span>IA aplicada</span><span>✿</span>
-        <span aria-hidden="true">Power BI</span><span aria-hidden="true">✿</span><span aria-hidden="true">Python</span><span aria-hidden="true">✿</span><span aria-hidden="true">Streamlit</span><span aria-hidden="true">✿</span>
-        <span aria-hidden="true">SQL</span><span aria-hidden="true">✿</span><span aria-hidden="true">Lakehouse</span><span aria-hidden="true">✿</span><span aria-hidden="true">DATASUS</span><span aria-hidden="true">✿</span>
-        <span aria-hidden="true">CadÚnico</span><span aria-hidden="true">✿</span><span aria-hidden="true">Storytelling com dados</span><span aria-hidden="true">✿</span><span aria-hidden="true">IA aplicada</span><span aria-hidden="true">✿</span>
+        <span>Power BI</span><span>∑</span><span>Python</span><span>∑</span><span>Streamlit</span><span>∑</span>
+        <span>SQL</span><span>∑</span><span>Lakehouse</span><span>∑</span><span>Modelagem de dados</span><span>∑</span>
+        <span>Indicadores</span><span>∑</span><span>Storytelling com dados</span><span>∑</span><span>IA aplicada</span><span>∑</span>
+        <span aria-hidden="true">Power BI</span><span aria-hidden="true">∑</span><span aria-hidden="true">Python</span><span aria-hidden="true">∑</span><span aria-hidden="true">Streamlit</span><span aria-hidden="true">∑</span>
+        <span aria-hidden="true">SQL</span><span aria-hidden="true">∑</span><span aria-hidden="true">Lakehouse</span><span aria-hidden="true">∑</span><span aria-hidden="true">Modelagem de dados</span><span aria-hidden="true">∑</span>
+        <span aria-hidden="true">Indicadores</span><span aria-hidden="true">∑</span><span aria-hidden="true">Storytelling com dados</span><span aria-hidden="true">∑</span><span aria-hidden="true">IA aplicada</span><span aria-hidden="true">∑</span>
       </div>
     </div>
 
     <!-- ============ SOBRE ============ -->
     <section id="sobre" class="secao">
       <div class="container sobre-grid">
-        <h2 class="revelar">Sobre mim</h2>
+        <div>
+          <p class="secao-num revelar">01 / sobre</p>
+          <h2 class="revelar">Método científico aplicado a dados</h2>
+        </div>
         <div>
           <p class="revelar">
-            Sou licenciada em Ciências Sociais pela UNIFESP e hoje atuo como Técnica de Projetos
-            na FGV Projetos, desenvolvendo análises de dados, painéis e relatórios institucionais
-            para governos estaduais.
+            Sou cientista social de formação, licenciada pela UNIFESP, e atuo como Técnica de Projetos
+            na FGV Projetos, desenvolvendo análises de dados, painéis e relatórios para grandes organizações.
           </p>
           <p class="revelar">
-            Minha formação me ajuda a olhar para os números sem perder de vista as pessoas por trás
-            deles. Uno rigor técnico na organização e análise de bases públicas à articulação entre
-            equipes, secretarias e gestores, para que os dados virem decisões melhores.
+            As Ciências Sociais me deram método: formular boas perguntas, escolher os indicadores certos
+            e interpretar resultados com contexto. Uno isso a ferramentas de dados para medir e gerar
+            impacto, seja em organizações sociais, empresas ou instituições.
           </p>
-          <ul class="areas">
-            <li class="revelar"><span>🍼</span>Primeira infância</li>
-            <li class="revelar"><span>🤝</span>Assistência social</li>
-            <li class="revelar"><span>📚</span>Educação</li>
-          </ul>
+          <dl class="ficha revelar">
+            <div><dt>formação</dt><dd>Ciências Sociais · UNIFESP</dd></div>
+            <div><dt>atual</dt><dd>Técnica de Projetos · FGV Projetos</dd></div>
+            <div><dt>foco</dt><dd>Dados para impacto social e de negócio</dd></div>
+            <div><dt>base</dt><dd>São Paulo, SP</dd></div>
+          </dl>
         </div>
       </div>
     </section>
@@ -100,22 +101,23 @@
     <!-- ============ COMPETÊNCIAS ============ -->
     <section id="competencias" class="secao secao-alt">
       <div class="container">
+        <p class="secao-num revelar">02 / competências</p>
         <h2 class="revelar">O que eu faço</h2>
         <div class="cards">
           <article class="card revelar">
-            <span class="icone">▤</span>
+            <span class="icone">[01]</span>
             <h3>Painéis e BI</h3>
-            <p>Painéis para monitorar programas sociais e apoiar a tomada de decisão de gestores.</p>
+            <p>Painéis que transformam bases complexas em acompanhamento claro para gestores e lideranças.</p>
           </article>
           <article class="card revelar">
-            <span class="icone">◎</span>
-            <h3>Indicadores e monitoramento</h3>
-            <p>Construção e revisão de indicadores, metodologias de acompanhamento e análise de bases públicas.</p>
+            <span class="icone">[02]</span>
+            <h3>Indicadores e mensuração de impacto</h3>
+            <p>Construção e revisão de indicadores e metodologias para saber se uma iniciativa está gerando o resultado esperado.</p>
           </article>
           <article class="card revelar">
-            <span class="icone">⇄</span>
-            <h3>Articulação e storytelling</h3>
-            <p>Tradução de dados em narrativas e apresentações executivas, e alinhamento entre diferentes áreas do governo.</p>
+            <span class="icone">[03]</span>
+            <h3>Storytelling com dados</h3>
+            <p>Tradução de análises em narrativas e apresentações executivas que apoiam decisões e alinham diferentes áreas.</p>
           </article>
         </div>
       </div>
@@ -124,102 +126,103 @@
     <!-- ============ PROJETOS ============ -->
     <section id="projetos" class="secao">
       <div class="container">
+        <p class="secao-num revelar">03 / projetos</p>
         <h2 class="revelar">Projetos em destaque</h2>
-        <p class="intro-secao revelar">Para cada projeto: o que eu fiz, com quais ferramentas e qual diferença fez.</p>
+        <p class="intro-secao revelar">Cada projeto em três partes: o que eu fiz, com quais ferramentas e qual diferença fez.</p>
         <div class="projetos">
 
           <article class="projeto revelar">
-            <div class="projeto-img cor-1"><span>💗</span></div>
+            <div class="grafico" data-tipo="linha" aria-hidden="true"></div>
             <div class="projeto-info">
-              <p class="tags">Assistência social · Governo estadual</p>
+              <p class="tags">prj-01 · setor público · assistência social</p>
               <h3>Monitoramento de programa de superação da pobreza</h3>
               <dl>
-                <dt>🎯 Atuação</dt>
-                <dd>Construí painéis de acompanhamento, monitorei a execução do programa e participei do alinhamento metodológico e da revisão de indicadores junto à secretaria.</dd>
-                <dt>🛠 Ferramentas</dt>
+                <dt>atuação</dt>
+                <dd>Construí painéis de acompanhamento, monitorei a execução do programa e participei do alinhamento metodológico e da revisão de indicadores junto ao cliente.</dd>
+                <dt>ferramentas</dt>
                 <dd class="ferramentas"><span>Power BI</span><span>Python</span><span>Streamlit</span></dd>
-                <dt>✨ Impacto</dt>
+                <dt>impacto</dt>
                 <dd>Acompanhamento contínuo do programa e indicadores mais consistentes para apoiar as decisões da gestão.</dd>
               </dl>
             </div>
           </article>
 
           <article class="projeto revelar">
-            <div class="projeto-img cor-2"><span>🧸</span></div>
+            <div class="grafico" data-tipo="dispersao" aria-hidden="true"></div>
             <div class="projeto-info">
-              <p class="tags">Primeira infância · Observatório estadual</p>
-              <h3>Observatório da primeira infância</h3>
+              <p class="tags">prj-02 · saúde · primeira infância</p>
+              <h3>Observatório de indicadores da primeira infância</h3>
               <dl>
-                <dt>🎯 Atuação</dt>
+                <dt>atuação</dt>
                 <dd>Mapeei indicadores, tratei bases públicas de saúde e construí a narrativa (storytelling) do painel.</dd>
-                <dt>🛠 Ferramentas</dt>
+                <dt>ferramentas</dt>
                 <dd class="ferramentas"><span>Python</span><span>Streamlit</span><span>PostgreSQL</span><span>DATASUS</span></dd>
-                <dt>✨ Impacto</dt>
-                <dd>Dados de saúde da primeira infância reunidos em um painel acessível, que ajuda gestores municipais a comparar realidades e priorizar ações.</dd>
+                <dt>impacto</dt>
+                <dd>Dados de saúde reunidos em um painel acessível, que ajuda gestores a comparar realidades e priorizar ações.</dd>
               </dl>
             </div>
           </article>
 
           <article class="projeto revelar">
-            <div class="projeto-img cor-3"><span>🤖</span></div>
+            <div class="grafico" data-tipo="rede" aria-hidden="true"></div>
             <div class="projeto-info">
-              <p class="tags">Inovação · IA · Menção Honrosa 🏅</p>
+              <p class="tags">prj-03 · inovação · ia · menção honrosa</p>
               <h3>IA para padronizar relatórios</h3>
               <dl>
-                <dt>🎯 Atuação</dt>
+                <dt>atuação</dt>
                 <dd>Participei da criação de uma ferramenta de inteligência artificial para padronizar relatórios institucionais.</dd>
-                <dt>🛠 Ferramentas</dt>
+                <dt>ferramentas</dt>
                 <dd class="ferramentas"><span>IA generativa</span><span>Automação</span></dd>
-                <dt>✨ Impacto</dt>
+                <dt>impacto</dt>
                 <dd>Relatórios mais padronizados e ágeis. O projeto foi reconhecido com Menção Honrosa.</dd>
               </dl>
             </div>
           </article>
 
           <article class="projeto revelar">
-            <div class="projeto-img cor-4"><span>🗂️</span></div>
+            <div class="grafico" data-tipo="camadas" aria-hidden="true"></div>
             <div class="projeto-info">
-              <p class="tags">Engenharia de dados · Assistência social</p>
-              <h3>Integração de bases sociais em arquitetura Lakehouse</h3>
+              <p class="tags">prj-04 · engenharia de dados</p>
+              <h3>Integração de bases em arquitetura Lakehouse</h3>
               <dl>
-                <dt>🎯 Atuação</dt>
-                <dd>Desenvolvi painéis sobre uma arquitetura de dados em camadas, integrando bases da assistência social e da saúde.</dd>
-                <dt>🛠 Ferramentas</dt>
-                <dd class="ferramentas"><span>Lakehouse</span><span>SQL</span><span>Power BI</span><span>CadÚnico</span></dd>
-                <dt>✨ Impacto</dt>
-                <dd>Informações de diferentes fontes organizadas em um só lugar, com mais confiança e agilidade para as análises.</dd>
+                <dt>atuação</dt>
+                <dd>Desenvolvi painéis sobre uma arquitetura de dados em camadas, integrando bases de diferentes fontes.</dd>
+                <dt>ferramentas</dt>
+                <dd class="ferramentas"><span>Lakehouse</span><span>SQL</span><span>Power BI</span></dd>
+                <dt>impacto</dt>
+                <dd>Informações de várias fontes organizadas em um só lugar, com mais confiança e agilidade para as análises.</dd>
               </dl>
             </div>
           </article>
 
           <article class="projeto revelar">
-            <div class="projeto-img cor-5"><span>🗺️</span></div>
+            <div class="grafico" data-tipo="barras" aria-hidden="true"></div>
             <div class="projeto-info">
-              <p class="tags">Assistência social · Análise regional</p>
+              <p class="tags">prj-05 · análise regional</p>
               <h3>Diagnóstico comparativo entre regiões</h3>
               <dl>
-                <dt>🎯 Atuação</dt>
-                <dd>Analisei dados das diretorias regionais e construí uma apresentação executiva comparando seus resultados.</dd>
-                <dt>🛠 Ferramentas</dt>
+                <dt>atuação</dt>
+                <dd>Analisei dados de unidades regionais e construí uma apresentação executiva comparando seus resultados.</dd>
+                <dt>ferramentas</dt>
                 <dd class="ferramentas"><span>Análise de dados</span><span>Visualização</span><span>Apresentação executiva</span></dd>
-                <dt>✨ Impacto</dt>
-                <dd>Uma visão clara das diferenças entre regiões para orientar o planejamento da secretaria.</dd>
+                <dt>impacto</dt>
+                <dd>Uma visão clara das diferenças entre regiões para orientar o planejamento.</dd>
               </dl>
             </div>
           </article>
 
           <article class="projeto revelar">
-            <div class="projeto-img cor-6"><span>🌱</span></div>
+            <div class="grafico" data-tipo="area" aria-hidden="true"></div>
             <div class="projeto-info">
-              <p class="tags">Primeira infância · Prefeitura de São Paulo</p>
-              <h3>Monitoramento de formação intersetorial</h3>
+              <p class="tags">prj-06 · educação e saúde · intersetorial</p>
+              <h3>Monitoramento de programa de formação</h3>
               <dl>
-                <dt>🎯 Atuação</dt>
-                <dd>Criei o monitoramento de um curso de atenção à primeira infância e fiz a articulação entre Saúde, Assistência Social e Educação.</dd>
-                <dt>🛠 Ferramentas</dt>
-                <dd class="ferramentas"><span>Power BI</span><span>Articulação intersetorial</span></dd>
-                <dt>✨ Impacto</dt>
-                <dd>Acompanhamento da formação em tempo real e três áreas do governo olhando para os mesmos dados.</dd>
+                <dt>atuação</dt>
+                <dd>Criei o monitoramento de um curso de formação e fiz a articulação entre as áreas de Saúde, Assistência Social e Educação.</dd>
+                <dt>ferramentas</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Gestão de stakeholders</span></dd>
+                <dt>impacto</dt>
+                <dd>Acompanhamento da formação em tempo real e três áreas trabalhando a partir dos mesmos dados.</dd>
               </dl>
             </div>
           </article>
@@ -231,30 +234,31 @@
     <!-- ============ TRAJETÓRIA ============ -->
     <section id="trajetoria" class="secao secao-alt">
       <div class="container">
+        <p class="secao-num revelar">04 / trajetória</p>
         <h2 class="revelar">Trajetória</h2>
         <ol class="linha-tempo">
           <li class="revelar">
-            <span class="periodo">Atual</span>
+            <span class="periodo">atual</span>
             <h3>Técnica de Projetos I · FGV Projetos</h3>
-            <p>Análise de dados, painéis e relatórios institucionais para governos estaduais, em políticas públicas e desenvolvimento social.</p>
+            <p>Análise de dados, painéis e relatórios institucionais para grandes clientes.</p>
           </li>
           <li class="revelar">
-            <span class="periodo">Primeira infância</span>
+            <span class="periodo">dados &amp; monitoramento</span>
             <h3>SEPE · Prefeitura de São Paulo</h3>
             <p>Monitoramento em Power BI e articulação entre Saúde, Assistência Social e Educação.</p>
           </li>
           <li class="revelar">
-            <span class="periodo">Educação</span>
+            <span class="periodo">metas &amp; indicadores</span>
             <h3>Movimento Profissão Docente · Instituto Península</h3>
-            <p>Alinhamentos com gestores estaduais sobre metas e indicadores.</p>
+            <p>Alinhamentos com gestores em torno de metas e indicadores.</p>
           </li>
           <li class="revelar">
-            <span class="periodo">Nov/2022 — Abr/2024</span>
+            <span class="periodo">nov/2022 — abr/2024</span>
             <h3>Bolsista PIBID/CAPES · Sociologia, UNIFESP</h3>
             <p>Pesquisa qualitativa com estudantes do ensino médio.</p>
           </li>
           <li class="revelar">
-            <span class="periodo">Formação</span>
+            <span class="periodo">formação</span>
             <h3>Licenciatura em Ciências Sociais · UNIFESP</h3>
             <p>TCC sobre relações étnico-raciais e representações em obras didáticas.</p>
           </li>
@@ -265,22 +269,21 @@
     <!-- ============ CONTATO ============ -->
     <section id="contato" class="secao contato">
       <div class="container contato-box revelar">
+        <p class="secao-num">05 / contato</p>
         <h2>Vamos conversar?</h2>
-        <p>Tenho interesse em projetos e oportunidades em dados para políticas públicas e impacto social.</p>
+        <p>Aberta a oportunidades em dados e impacto, no setor social ou privado.</p>
         <div class="acoes">
           <a href="mailto:seuemail@exemplo.com" class="btn">Enviar e-mail</a>
           <a href="https://www.linkedin.com/in/seu-perfil" class="btn btn-contorno" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/mialvino3-a11y" class="btn btn-contorno" target="_blank" rel="noopener">GitHub</a>
         </div>
-        <ul class="redes">
-          <li><a href="https://github.com/mialvino3-a11y" target="_blank" rel="noopener">GitHub</a></li>
-        </ul>
       </div>
     </section>
 
   </main>
 
   <footer class="rodape">
-    <p>© <span id="ano">2026</span> Mirella Alvino · São Paulo, SP · feito com ♡</p>
+    <p>© <span id="ano">2026</span> Mirella Alvino · São Paulo, SP</p>
   </footer>
 
   <script src="efeitos.js"></script>
