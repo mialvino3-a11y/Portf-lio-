@@ -157,3 +157,78 @@ const atualizarBarra = () => {
 };
 window.addEventListener('scroll', atualizarBarra, { passive: true });
 atualizarBarra();
+
+// ============ EFEITOS 3D ============
+const temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+// Cubo: gira sozinho e pode ser arrastado com o mouse ou o dedo
+const cena = document.querySelector('.cena');
+const cubo = document.querySelector('.cubo');
+if (cena && cubo && !semAnimacao) {
+  let rx = -22, ry = 35, velocidade = 0, arrastando = false, ultimoX = 0, ultimoY = 0, visivel = true;
+  const girar = () => {
+    if (visivel && !arrastando) {
+      ry += 0.35 + velocidade;
+      velocidade *= 0.95;
+    }
+    cubo.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    requestAnimationFrame(girar);
+  };
+  cena.addEventListener('pointerdown', (e) => {
+    arrastando = true; ultimoX = e.clientX; ultimoY = e.clientY;
+    cena.setPointerCapture(e.pointerId);
+  });
+  cena.addEventListener('pointermove', (e) => {
+    if (!arrastando) return;
+    const dx = e.clientX - ultimoX, dy = e.clientY - ultimoY;
+    ry += dx * 0.6;
+    rx = Math.max(-80, Math.min(80, rx - dy * 0.6));
+    velocidade = dx * 0.3;
+    ultimoX = e.clientX; ultimoY = e.clientY;
+  });
+  const soltar = () => { arrastando = false; };
+  cena.addEventListener('pointerup', soltar);
+  cena.addEventListener('pointercancel', soltar);
+  new IntersectionObserver(([e]) => { visivel = e.isIntersecting; }).observe(cena);
+  requestAnimationFrame(girar);
+}
+
+if (temMouse && !semAnimacao) {
+  // Título: inclina e a sombra muda de lado conforme o mouse
+  const hero = document.querySelector('.hero');
+  const titulo = document.querySelector('.titulo-3d');
+  const laranja = getComputedStyle(document.documentElement).getPropertyValue('--laranja').trim();
+  const sombra = (dx, dy) => {
+    const camadas = [];
+    for (let i = 1; i <= 7; i++) {
+      camadas.push(`${(-dx * i).toFixed(1)}px ${(-dy * i).toFixed(1)}px 0 ${i === 7 ? '#111' : laranja}`);
+    }
+    return camadas.join(', ');
+  };
+  hero.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    const dx = (e.clientX - r.left) / r.width * 2 - 1;   // -1 a 1
+    const dy = (e.clientY - r.top) / r.height * 2 - 1;
+    titulo.style.transform = `perspective(1000px) rotateY(${dx * 10}deg) rotateX(${-dy * 8}deg)`;
+    titulo.style.textShadow = sombra(dx * 1.2, dy * 1.2);
+  });
+  hero.addEventListener('pointerleave', () => {
+    titulo.style.transform = '';
+    titulo.style.textShadow = '';
+  });
+
+  // Cartões: inclinam em 3D seguindo o mouse, com a sombra acompanhando
+  document.querySelectorAll('.projeto, .card').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;   // -0.5 a 0.5
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--rx', `${-y * 14}deg`);
+      card.style.setProperty('--ry', `${x * 14}deg`);
+      card.style.setProperty('--sx', `${(-x * 20).toFixed(1)}px`);
+      card.style.setProperty('--sy', `${(-y * 20 + 4).toFixed(1)}px`);
+      card.classList.add('inclinando');
+    });
+    card.addEventListener('pointerleave', () => card.classList.remove('inclinando'));
+  });
+}
