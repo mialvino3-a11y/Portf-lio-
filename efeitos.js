@@ -23,7 +23,10 @@ const irPara = (hash) => {
   const alvo = document.querySelector(hash);
   if (!alvo) return;
   const topo = document.querySelector('.topo');
-  const y = alvo.getBoundingClientRect().top + window.pageYOffset - (topo ? topo.offsetHeight : 0);
+  // posição real na página, ignorando animações de entrada que deslocam o elemento
+  let y = 0;
+  for (let el = alvo; el; el = el.offsetParent) y += el.offsetTop;
+  y -= topo ? topo.offsetHeight : 0;
   try { window.scrollTo({ top: y, behavior: semAnimacao ? 'auto' : 'smooth' }); }
   catch (erro) { window.scrollTo(0, y); }
   try { history.replaceState(null, '', hash); } catch (erro) { /* alguns ambientes não permitem */ }
@@ -357,7 +360,7 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   };
 
   if (!window.matchMedia('(hover: hover)').matches) {
-    mundo.querySelector('.mundo-legenda').textContent = 'Gire o globo e toque numa especialidade';
+    mundo.querySelector('.mundo-legenda').textContent = 'Gire o globo e toque num projeto';
   }
   medir(); desenhar();
   if (document.fonts) document.fonts.ready.then(() => { medir(); desenhar(); });
@@ -384,7 +387,7 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   blocos.forEach((b, i) => b.addEventListener('click', (e) => {
     e.preventDefault();
     const hash = b.getAttribute('href');
-    if (b.dataset.filtro && typeof filtrarProjetos === 'function') filtrarProjetos(b.dataset.filtro);
+    destacarProjeto(hash);
     if (semAnimacao) { irPara(hash); return; }
     const q = projetar(ancoras[i]);
     pulsos.push({ x: q.x, y: q.y, t: 0 });
@@ -454,34 +457,14 @@ if (temMouse && !semAnimacao) {
   });
 }
 
-// ============ PROJETOS POR ESPECIALIDADE (escolhida no globo) ============
-const NOMES_ESP = {
-  bi: 'Painéis e BI', analise: 'Análise e estatística', engenharia: 'Engenharia e integração de dados',
-  pesquisa: 'Pesquisa e diagnóstico', storytelling: 'Storytelling e visualização', inovacao: 'Inovação e produtos digitais',
-};
-const projetos = [...document.querySelectorAll('.projeto[data-esp]')];
-const faixaFiltro = document.querySelector('.filtro-ativo');
-function filtrarProjetos(esp) {
-  let visiveis = 0;
-  projetos.forEach((p) => {
-    const mostra = esp === 'todos' || p.dataset.esp.split(' ').indexOf(esp) !== -1;
-    p.hidden = !mostra;
-    p.classList.remove('filtrado', 'revelar');
-    if (mostra) {
-      visiveis++;
-      void p.offsetWidth;   // reinicia a animação de entrada
-      p.classList.add('filtrado', 'visivel');
-      p.querySelectorAll('.grafico').forEach((g) => g.classList.add('desenhado'));
-    }
-  });
-  if (!faixaFiltro) return;
-  faixaFiltro.hidden = esp === 'todos';
-  if (esp !== 'todos') {
-    faixaFiltro.querySelector('strong').textContent = NOMES_ESP[esp] || esp;
-    faixaFiltro.querySelector('span').textContent = `${visiveis} projeto${visiveis === 1 ? '' : 's'}`;
-  }
+// ============ DESTAQUE NO PROJETO ESCOLHIDO PELO GLOBO ============
+function destacarProjeto(hash) {
+  const alvo = document.querySelector(hash);
+  if (!alvo || !alvo.classList.contains('projeto')) return;
+  alvo.classList.remove('revelar');
+  alvo.classList.add('visivel');
+  alvo.querySelectorAll('.grafico').forEach((g) => g.classList.add('desenhado'));
+  alvo.classList.remove('destacado');
+  void alvo.offsetWidth;   // reinicia a animação se clicar de novo
+  alvo.classList.add('destacado');
 }
-const botaoLimpar = document.querySelector('.filtro-limpar');
-if (botaoLimpar) botaoLimpar.addEventListener('click', () => filtrarProjetos('todos'));
-// links comuns para "Projetos" (menu e quadradinhos) mostram todos os projetos
-document.querySelectorAll('a[href="#projetos"]:not(.bloco)').forEach((a) => a.addEventListener('click', () => filtrarProjetos('todos')));

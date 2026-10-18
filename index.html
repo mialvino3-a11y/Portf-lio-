@@ -53,15 +53,18 @@
              Os blocos giram junto com o globo e levam para cada seção. -->
         <div class="mundo">
           <canvas class="mundo-canvas" aria-hidden="true"></canvas>
-          <nav class="blocos" aria-label="Especialidades: escolha uma para ver os projetos">
-            <a href="#projetos" class="bloco" data-filtro="bi" data-lat="35" data-lon="-30">Painéis e BI</a>
-            <a href="#projetos" class="bloco" data-filtro="analise" data-lat="-20" data-lon="35">Análise e estatística</a>
-            <a href="#projetos" class="bloco" data-filtro="engenharia" data-lat="15" data-lon="110">Engenharia de dados</a>
-            <a href="#projetos" class="bloco" data-filtro="pesquisa" data-lat="-45" data-lon="-100">Pesquisa e diagnóstico</a>
-            <a href="#projetos" class="bloco" data-filtro="storytelling" data-lat="55" data-lon="170">Storytelling</a>
-            <a href="#projetos" class="bloco" data-filtro="inovacao" data-lat="-5" data-lon="-160">Inovação e IA</a>
+          <nav class="blocos" aria-label="Projetos: escolha um para ver os detalhes">
+            <a href="#proj-superacao" class="bloco" data-lat="53" data-lon="-180">SuperAção SP</a>
+            <a href="#proj-piaui" class="bloco" data-lat="36" data-lon="-42">Observatório PI</a>
+            <a href="#proj-feminicidio" class="bloco" data-lat="22" data-lon="95">Observatório do Feminicídio</a>
+            <a href="#proj-datapedia" class="bloco" data-lat="11" data-lon="-128">Datapedia</a>
+            <a href="#proj-protocolo" class="bloco" data-lat="0" data-lon="10">Primeiríssima Infância SP</a>
+            <a href="#proj-estagio" class="bloco" data-lat="-11" data-lon="148">Estágio Obrigatório</a>
+            <a href="#proj-ia" class="bloco" data-lat="-22" data-lon="-75">IA para relatórios</a>
+            <a href="#proj-lakehouse" class="bloco" data-lat="-36" data-lon="62">Lakehouse</a>
+            <a href="#proj-juventudes" class="bloco" data-lat="-53" data-lon="-160">Juventudes e Ensino Médio</a>
           </nav>
-          <p class="mundo-legenda">Gire o globo e clique numa especialidade</p>
+          <p class="mundo-legenda">Gire o globo e clique num projeto</p>
         </div>
       </div>
     </section>
@@ -144,14 +147,10 @@
     <section id="projetos" class="secao">
       <div class="container">
         <h2 class="revelar">Projetos</h2>
-        <p class="intro-secao revelar">O que eu fiz, com quais ferramentas e qual diferença fez. Para ver por especialidade, use o globo no topo da página.</p>
-        <div class="filtro-ativo" hidden>
-          <p aria-live="polite">Especialidade: <strong></strong> <span></span></p>
-          <button type="button" class="filtro-limpar">Ver todos os projetos</button>
-        </div>
+        <p class="intro-secao revelar">O que eu fiz, com quais ferramentas e qual diferença fez. Você também pode chegar a cada projeto pelo globo no topo da página.</p>
         <div class="projetos">
 
-          <article class="projeto revelar" data-esp="bi analise inovacao">
+          <article class="projeto revelar" id="proj-superacao">
             <div class="projeto-img"><img src="img/painel-superacao.jpg" alt="Tela inicial do painel de gestão do Programa SuperAção SP" loading="lazy"></div>
             <div class="projeto-info">
               <p class="tags">01 · Governo do Estado de SP · Assistência social</p>
@@ -167,7 +166,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="bi analise engenharia pesquisa">
+          <article class="projeto revelar" id="proj-piaui">
             <div class="projeto-img"><img src="img/observatorio-primeira-infancia.jpg" alt="Tela inicial do Observatório da Primeira Infância do Piauí" loading="lazy"></div>
             <div class="projeto-info">
               <p class="tags">02 · Governo do Piauí · Primeira infância</p>
@@ -183,7 +182,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="bi storytelling">
+          <article class="projeto revelar" id="proj-feminicidio">
             <div class="projeto-img"><img src="img/observatorio-feminicidio.jpg" alt="Tela inicial do Observatório do Feminicídio do Rio de Janeiro" loading="lazy"></div>
             <div class="projeto-info">
               <p class="tags">03 · Freelance · Governo do Estado do RJ · Violência contra a mulher</p>
@@ -199,7 +198,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="analise pesquisa storytelling inovacao">
+          <article class="projeto revelar" id="proj-datapedia">
             <div class="grafico" data-tipo="mapa" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">04 · Estado de São Paulo · Primeira infância</p>
@@ -215,7 +214,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="bi">
+          <article class="projeto revelar" id="proj-protocolo">
             <div class="grafico" data-tipo="area" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">05 · Prefeitura de São Paulo · Primeira infância</p>
@@ -231,7 +230,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="bi inovacao">
+          <article class="projeto revelar" id="proj-estagio">
             <div class="grafico" data-tipo="linha" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">06 · Instituto Península · Educação · Inovação</p>
@@ -247,7 +246,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="inovacao">
+          <article class="projeto revelar" id="proj-ia">
             <div class="grafico" data-tipo="rede" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">07 · Inovação · IA · Menção honrosa</p>
@@ -263,7 +262,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="engenharia bi">
+          <article class="projeto revelar" id="proj-lakehouse">
             <div class="grafico" data-tipo="camadas" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">08 · Engenharia de dados</p>
@@ -279,7 +278,7 @@
             </div>
           </article>
 
-          <article class="projeto revelar" data-esp="pesquisa analise">
+          <article class="projeto revelar" id="proj-juventudes">
             <div class="grafico" data-tipo="barras" aria-hidden="true"></div>
             <div class="projeto-info">
               <p class="tags">09 · UNIFESP · PIBID/CAPES · Educação</p>

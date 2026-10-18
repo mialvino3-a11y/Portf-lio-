@@ -115,23 +115,12 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .card:hover { transform: translate(-4px, -4px) rotate(-1deg); box-shadow: 10px 10px 0 var(--preto); }
 .icone { display: block; font-family: var(--titulo); font-size: 3rem; line-height: 1; margin-bottom: 1rem; -webkit-text-stroke: 2px var(--preto); color: transparent; }
 .card:hover .icone { color: var(--amarelo); }
-/* linha que mostra a especialidade escolhida no globo */
-.filtro-ativo {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem;
-  margin: -1rem 0 2rem; padding: .8rem 1rem; background: var(--preto); color: var(--branco);
-  border: var(--borda); box-shadow: 4px 4px 0 var(--laranja);
+/* destaque no projeto escolhido pelo globo */
+.projeto.destacado { animation: destacar 1.6s ease; }
+@keyframes destacar {
+  0%, 100% { box-shadow: var(--sombra); }
+  20%, 60% { box-shadow: 0 0 0 6px var(--laranja), 10px 10px 0 6px var(--preto); }
 }
-.filtro-ativo[hidden] { display: none; }
-.filtro-ativo strong { color: var(--amarelo); text-transform: uppercase; letter-spacing: .03em; }
-.filtro-ativo span { opacity: .7; font-size: .9rem; }
-.filtro-limpar {
-  font: inherit; font-weight: 700; font-size: .82rem; text-transform: uppercase; cursor: pointer;
-  background: var(--amarelo); color: var(--preto); border: 2px solid var(--amarelo); padding: .4rem .8rem;
-}
-.filtro-limpar:hover, .filtro-limpar:focus-visible { background: var(--branco); border-color: var(--branco); outline: none; }
-.projeto[hidden] { display: none; }
-.projeto.filtrado { animation: aparecer .45s cubic-bezier(.2,.9,.3,1.2); }
-@keyframes aparecer { from { opacity: 0; transform: translateY(18px) scale(.97); } }
 
 /* quadradinhos de navegação da capa */
 .quadros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; margin-top: 2.2rem; max-width: 38rem; }
@@ -251,7 +240,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .com-efeitos .grafico.desenhado .ponto-2 { opacity: 1; transition: opacity .6s ease; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor-texto, .faixa-trilho, .projeto.filtrado { animation: none; }
+  .cursor-texto, .faixa-trilho, .projeto.destacado { animation: none; }
   .titulo-3d { transition: none; }
 }
 
@@ -282,6 +271,9 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .bloco:nth-child(4) { left: 30%; top: 78%; }
 .bloco:nth-child(5) { left: 34%; top: 15%; }
 .bloco:nth-child(6) { left: 62%; top: 85%; }
+.bloco:nth-child(7) { left: 20%; top: 50%; }
+.bloco:nth-child(8) { left: 80%; top: 40%; }
+.bloco:nth-child(9) { left: 50%; top: 92%; }
 .bloco.atras { pointer-events: none; }
 .mundo-legenda {
   position: absolute; left: 50%; bottom: -.5rem; transform: translateX(-50%); white-space: nowrap;
