@@ -360,7 +360,7 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   };
 
   if (!window.matchMedia('(hover: hover)').matches) {
-    mundo.querySelector('.mundo-legenda').textContent = 'Gire o globo e toque num projeto';
+    mundo.querySelector('.mundo-legenda').textContent = 'Arraste para girar · toque num bloco de dados';
   }
   medir(); desenhar();
   if (document.fonts) document.fonts.ready.then(() => { medir(); desenhar(); });

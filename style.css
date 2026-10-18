@@ -262,6 +262,8 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   transition: background .15s, color .15s, box-shadow .15s;
 }
 /* regras separadas: navegadores antigos ignoram a regra inteira se não conhecem :focus-visible */
+.bloco small { font-size: .7rem; color: var(--laranja); }
+.bloco:hover small, .bloco:focus-visible small { color: var(--preto); }
 .bloco:hover { background: var(--laranja); color: var(--preto); box-shadow: 6px 6px 0 var(--preto); }
 .bloco:focus-visible { background: var(--laranja); color: var(--preto); box-shadow: 6px 6px 0 var(--preto); outline: none; }
 /* posições iniciais, usadas também se o JavaScript não carregar */
