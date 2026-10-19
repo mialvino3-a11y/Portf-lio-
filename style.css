@@ -69,7 +69,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   display: inline-block; font-weight: 700; text-transform: uppercase; font-size: .9rem; letter-spacing: .05em;
   border: var(--borda); background: var(--branco); padding: .3rem .8rem;
 }
-.hero h1 { font-size: clamp(2.6rem, 11vw, 7.2rem); margin: 1.5rem 0 1.8rem; }
+.hero h1 { font-size: clamp(2.4rem, 8.5vw, 5.8rem); margin: 1.5rem 0 1.8rem; }
 .tarja { background: var(--preto); color: var(--amarelo); padding: 0 .12em; display: inline-block; transform: rotate(-1.5deg); }
 .cargo { font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 500; max-width: 40rem; }
 .digitando { margin-top: 1rem; font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; }
