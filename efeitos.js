@@ -418,29 +418,6 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
 }
 
 if (temMouse && !semAnimacao) {
-  // Título: inclina e a sombra muda de lado conforme o mouse
-  const hero = document.querySelector('.hero');
-  const titulo = document.querySelector('.titulo-3d');
-  const laranja = getComputedStyle(document.documentElement).getPropertyValue('--laranja').trim();
-  const sombra = (dx, dy) => {
-    const camadas = [];
-    for (let i = 1; i <= 7; i++) {
-      camadas.push(`${(-dx * i).toFixed(1)}px ${(-dy * i).toFixed(1)}px 0 ${i === 7 ? '#111' : laranja}`);
-    }
-    return camadas.join(', ');
-  };
-  hero.addEventListener('pointermove', (e) => {
-    const r = hero.getBoundingClientRect();
-    const dx = (e.clientX - r.left) / r.width * 2 - 1;   // -1 a 1
-    const dy = (e.clientY - r.top) / r.height * 2 - 1;
-    titulo.style.transform = `perspective(1000px) rotateY(${dx * 10}deg) rotateX(${-dy * 8}deg)`;
-    titulo.style.textShadow = sombra(dx * 1.2, dy * 1.2);
-  });
-  hero.addEventListener('pointerleave', () => {
-    titulo.style.transform = '';
-    titulo.style.textShadow = '';
-  });
-
   // Cartões: inclinam em 3D seguindo o mouse, com a sombra acompanhando
   document.querySelectorAll('.projeto, .card').forEach((card) => {
     card.addEventListener('pointermove', (e) => {

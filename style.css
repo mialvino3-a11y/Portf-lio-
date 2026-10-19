@@ -69,7 +69,10 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   display: inline-block; font-weight: 700; text-transform: uppercase; font-size: .9rem; letter-spacing: .05em;
   border: var(--borda); background: var(--branco); padding: .3rem .8rem;
 }
-.hero h1 { font-size: clamp(2.4rem, 8.5vw, 5.8rem); margin: 1.5rem 0 1.8rem; }
+.hero h1 {
+  font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700; text-transform: none;
+  letter-spacing: -.045em; line-height: .95; font-size: clamp(3rem, 9vw, 6.5rem); margin: 1.4rem 0 1.6rem;
+}
 .tarja { background: var(--preto); color: var(--amarelo); padding: 0 .12em; display: inline-block; transform: rotate(-1.5deg); }
 .cargo { font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 500; max-width: 40rem; }
 .digitando { margin-top: 1rem; font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; }
@@ -242,7 +245,6 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 
 @media (prefers-reduced-motion: reduce) {
   .cursor-texto, .faixa-trilho, .projeto.destacado { animation: none; }
-  .titulo-3d { transition: none; }
 }
 
 /* ============ CAPA: MUNDO DE DADOS ============ */
@@ -285,14 +287,6 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 }
 
 /* ============ EFEITOS 3D ============ */
-/* título com profundidade (a sombra muda de direção com o mouse) */
-.titulo-3d {
-  text-shadow: 1px 1px 0 var(--laranja), 2px 2px 0 var(--laranja), 3px 3px 0 var(--laranja),
-    4px 4px 0 var(--laranja), 5px 5px 0 var(--laranja), 6px 6px 0 var(--laranja), 7px 7px 0 var(--preto);
-  transition: transform .15s ease-out;
-  will-change: transform;
-}
-.titulo-3d .tarja { text-shadow: none; }
 
 /* cartões com profundidade: inclinam com o mouse e o conteúdo "salta".
    Só em aparelhos com mouse (no toque não há inclinação, e o Safari do iPhone
