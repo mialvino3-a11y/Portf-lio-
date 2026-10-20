@@ -132,19 +132,6 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   20%, 60% { box-shadow: 0 0 0 6px var(--laranja), 10px 10px 0 6px var(--preto); }
 }
 
-/* quadradinhos de navegação da capa */
-.quadros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; margin-top: 2.2rem; max-width: 38rem; }
-.quadro {
-  aspect-ratio: 1; display: flex; flex-direction: column; justify-content: space-between;
-  padding: .75rem; background: var(--branco); color: var(--preto); text-decoration: none;
-  border: var(--borda); box-shadow: 4px 4px 0 var(--preto);
-  transition: transform .15s, box-shadow .15s, background .15s;
-}
-.quadro small { font-weight: 700; font-size: .75rem; color: var(--laranja); }
-.quadro span { font-family: var(--titulo); text-transform: uppercase; font-size: .8rem; line-height: 1.1; overflow-wrap: anywhere; }
-.quadro i { font-style: normal; font-weight: 700; align-self: flex-end; transition: transform .15s; }
-.quadro:hover, .quadro:focus-visible { background: var(--preto); color: var(--amarelo); transform: translate(-3px, -3px); box-shadow: 7px 7px 0 var(--laranja); outline: none; }
-.quadro:hover i, .quadro:focus-visible i { transform: translate(3px, 3px); }
 .intro-secao { font-size: 1.15rem; font-weight: 500; margin: -1.5rem 0 2.5rem; }
 
 /* ============ PROJETOS ============ */
@@ -330,11 +317,6 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 }
 
 /* ============ CELULAR ============ */
-@media (max-width: 800px) {
-  .quadros { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 22rem; }
-  .quadro { aspect-ratio: auto; min-height: 4.6rem; gap: .4rem; }
-  .quadro span { font-size: .9rem; }
-}
 @media (max-width: 800px) {
   .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
   .foto { max-width: 260px; }
