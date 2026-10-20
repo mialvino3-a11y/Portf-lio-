@@ -104,18 +104,19 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 
 .sobre-grid { display: grid; grid-template-columns: 1fr 1.7fr; gap: 4rem; align-items: start; }
 .sobre-grid p { margin-bottom: 1rem; font-size: 1.1rem; }
+.foto { max-width: 320px; }
 .foto img, .foto-placeholder {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center;
   border: var(--borda); box-shadow: 12px 12px 0 var(--amarelo), 12px 12px 0 3px var(--preto);
   transform: rotate(-2deg);
 }
 .foto-placeholder { display: grid; place-items: center; background: var(--branco); font-family: var(--titulo); font-size: 6rem; }
 .sobre-grid strong { color: var(--preto); background: linear-gradient(transparent 55%, var(--amarelo) 55%); padding: 0 .1em; }
-.ficha { margin-top: 2rem; border: var(--borda); background: var(--branco); box-shadow: var(--sombra); }
-.ficha div { display: grid; grid-template-columns: 8rem 1fr; }
-.ficha div + div { border-top: var(--borda); }
-.ficha dt { background: var(--amarelo); padding: .7rem 1rem; font-weight: 700; text-transform: uppercase; font-size: .85rem; border-right: var(--borda); }
-.ficha dd { padding: .7rem 1rem; font-weight: 500; }
+/* informações rápidas: texto simples, sem cara de botão */
+.ficha { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px dashed rgba(17,17,17,.25); display: flex; flex-wrap: wrap; gap: .4rem 2rem; }
+.ficha div { display: flex; align-items: baseline; gap: .5rem; }
+.ficha dt { font-weight: 700; text-transform: uppercase; font-size: .75rem; letter-spacing: .06em; color: var(--laranja); }
+.ficha dd { font-weight: 500; }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1.6rem; }
 .card {
@@ -318,8 +319,9 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 
 /* ============ CELULAR ============ */
 @media (max-width: 800px) {
-  .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .foto { max-width: 260px; }
+  .sobre-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  .foto { max-width: 9.5rem; }
+  .foto img { border-radius: 50%; transform: none; box-shadow: 6px 6px 0 var(--amarelo), 6px 6px 0 3px var(--preto); }
   .menu-btn { display: block; }
   .idioma { margin-left: auto; margin-right: .8rem; }
   .menu {
@@ -330,7 +332,5 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   .menu.aberto { display: flex; }
   .projetos { grid-template-columns: 1fr; }
   .linha-tempo > li { grid-template-columns: 1fr; gap: .6rem; }
-  .ficha div { grid-template-columns: 1fr; }
-  .ficha dt { border-right: 0; border-bottom: var(--borda); }
   .faixa-trilho { font-size: 1.2rem; }
 }
