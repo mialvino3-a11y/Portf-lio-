@@ -360,7 +360,8 @@ if (mundo && canvasMundo && canvasMundo.getContext) {
   };
 
   if (!window.matchMedia('(hover: hover)').matches) {
-    mundo.querySelector('.mundo-legenda').textContent = 'Arraste para girar · toque num bloco de dados';
+    const leg = mundo.querySelector('.mundo-legenda');
+    if (leg && leg.dataset.toque) leg.textContent = leg.dataset.toque;
   }
   medir(); desenhar();
   if (document.fonts) document.fonts.ready.then(() => { medir(); desenhar(); });
@@ -445,3 +446,10 @@ function destacarProjeto(hash) {
   void alvo.offsetWidth;   // reinicia a animação se clicar de novo
   alvo.classList.add('destacado');
 }
+
+// troca de idioma mantém a seção atual
+document.querySelectorAll('.idioma a').forEach(a => {
+  a.addEventListener('click', () => {
+    if (location.hash) a.href = a.getAttribute('href').split('#')[0] + location.hash;
+  });
+});

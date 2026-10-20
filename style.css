@@ -62,6 +62,12 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
 .menu a:not(.btn) { background: linear-gradient(var(--amarelo), var(--amarelo)) no-repeat 0 100% / 0 40%; transition: background-size .25s; }
 .menu a:not(.btn):hover { background-size: 100% 40%; }
 .menu-btn { display: none; background: none; border: 0; font-size: 1.6rem; cursor: pointer; }
+.logo { order: 1; } .menu { order: 2; } .idioma { order: 3; } .menu-btn { order: 4; }
+.idioma { display: flex; align-items: center; gap: .35rem; font-weight: 700; font-size: .85rem; margin-left: 1.8rem; }
+.idioma span { opacity: .4; }
+.idioma a { text-decoration: none; padding: .15rem .45rem; border: 2px solid transparent; }
+.idioma a:hover { border-color: var(--preto); }
+.idioma a[aria-current="page"] { background: var(--preto); color: var(--amarelo); }
 
 /* ============ INÍCIO ============ */
 .hero { position: relative; background: var(--amarelo); padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(4rem, 9vw, 7rem); border-bottom: var(--borda); }
@@ -333,6 +339,7 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; margin-bottom: .5re
   .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
   .foto { max-width: 260px; }
   .menu-btn { display: block; }
+  .idioma { margin-left: auto; margin-right: .8rem; }
   .menu {
     display: none; position: absolute; top: 64px; left: 0; right: 0;
     flex-direction: column; gap: 1.2rem; padding: 1.5rem;

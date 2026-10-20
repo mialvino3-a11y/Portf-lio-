@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mirella Alvino — Portfolio</title>
+  <meta name="description" content="Portfolio of Mirella Alvino: business intelligence and innovative solutions with data, platforms and AI.">
+  <link rel="alternate" hreflang="pt-BR" href="index.html">
+  <link rel="alternate" hreflang="en" href="en.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="progresso" aria-hidden="true"></div>
+
+  <!-- ============ MENU ============ -->
+  <header class="topo">
+    <nav class="container nav">
+      <a href="#inicio" class="logo">Mirella Alvino</a>
+      <div class="idioma" aria-label="Language">
+        <a href="index.html" lang="pt-BR" hreflang="pt-BR">PT</a>
+        <span aria-hidden="true">|</span>
+        <a href="en.html" aria-current="page">EN</a>
+      </div>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+      <ul class="menu">
+        <li><a href="#sobre">About</a></li>
+        <li><a href="#competencias">Skills</a></li>
+        <li><a href="#projetos">Projects</a></li>
+        <li><a href="#trajetoria">Experience</a></li>
+        <li><a href="#contato" class="btn btn-pequeno">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ INÍCIO ============ -->
+    <section id="inicio" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-texto">
+          <p class="etiqueta revelar">Data analyst · Social scientist</p>
+          <h1 class="revelar">Portfolio</h1>
+          <p class="cargo revelar">I understand what the business needs and build innovative solutions with data, platforms and AI.</p>
+          <p class="digitando revelar" aria-label="Turning data into decisions, solutions, innovation, products and impact">
+            Turning data into <span class="palavra" data-palavras="decisions|solutions|innovation|products|impact">decisions</span><span class="cursor-texto" aria-hidden="true">_</span>
+          </p>
+          <nav class="quadros revelar" aria-label="Portfolio sections">
+            <a href="#sobre" class="quadro"><small>01</small><span>About me</span><i aria-hidden="true">↘</i></a>
+            <a href="#projetos" class="quadro"><small>02</small><span>Projects</span><i aria-hidden="true">↘</i></a>
+            <a href="#trajetoria" class="quadro"><small>03</small><span>Experience</span><i aria-hidden="true">↘</i></a>
+            <a href="#contato" class="quadro"><small>04</small><span>Contact</span><i aria-hidden="true">↘</i></a>
+          </nav>
+        </div>
+
+        <!-- mundo social feito de dados: pessoas (pontos) ligadas por conexões.
+             Os blocos giram junto com o globo e levam para cada seção. -->
+        <div class="mundo">
+          <canvas class="mundo-canvas" aria-hidden="true"></canvas>
+          <nav class="blocos" aria-label="Explore the world of data">
+            <a href="#sobre" class="bloco" data-lat="38" data-lon="-35"><small>01</small>About me</a>
+            <a href="#competencias" class="bloco" data-lat="-10" data-lon="45"><small>02</small>Skills</a>
+            <a href="#projetos" class="bloco" data-lat="12" data-lon="140"><small>03</small>Projects</a>
+            <a href="#trajetoria" class="bloco" data-lat="-40" data-lon="-120"><small>04</small>Experience</a>
+            <a href="#contato" class="bloco" data-lat="55" data-lon="-170"><small>05</small>Contact</a>
+          </nav>
+          <p class="mundo-legenda" data-toque="Drag to spin · tap a data block">Drag to spin · click a data block</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAIXA DE FERRAMENTAS ============ -->
+    <div class="faixa" aria-label="Tools I use">
+      <div class="faixa-trilho">
+        <span>Power BI</span><span>✦</span><span>Python</span><span>✦</span><span>Streamlit</span><span>✦</span><span>SQL</span><span>✦</span><span>Web scraping</span><span>✦</span><span>Exploratory analysis</span><span>✦</span><span>Time series</span><span>✦</span><span>Business intelligence</span><span>✦</span><span>Data storytelling</span><span>✦</span><span>AI products</span><span>✦</span>
+        <span aria-hidden="true">Power BI</span><span aria-hidden="true">✦</span><span aria-hidden="true">Python</span><span aria-hidden="true">✦</span><span aria-hidden="true">Streamlit</span><span aria-hidden="true">✦</span><span aria-hidden="true">SQL</span><span aria-hidden="true">✦</span><span aria-hidden="true">Web scraping</span><span aria-hidden="true">✦</span><span aria-hidden="true">Exploratory analysis</span><span aria-hidden="true">✦</span><span aria-hidden="true">Time series</span><span aria-hidden="true">✦</span><span aria-hidden="true">Business intelligence</span><span aria-hidden="true">✦</span><span aria-hidden="true">Data storytelling</span><span aria-hidden="true">✦</span><span aria-hidden="true">AI products</span><span aria-hidden="true">✦</span>
+      </div>
+    </div>
+
+    <!-- ============ SOBRE ============ -->
+    <section id="sobre" class="secao">
+      <div class="container sobre-grid">
+        <div class="foto revelar">
+          <img src="img/mirella.jpg" alt="Photo of Mirella Alvino" width="640" height="800">
+        </div>
+        <div>
+          <h2 class="revelar">About me</h2>
+          <p class="revelar">
+            I'm a social scientist who works with data. I like to understand what lies behind each
+            question and to find, in the data, ways to answer it, whether through an analysis, a dashboard,
+            an indicator or an AI-powered solution.
+          </p>
+          <p class="revelar">
+            The Social Sciences taught me to look at the context before the numbers, and my teaching degree
+            taught me to explain complex things in a way everyone can understand. I've brought this approach
+            to topics such as early childhood, social assistance, education and women's rights, and I'm open
+            to new challenges, in the social or private sector.
+          </p>
+          <dl class="ficha revelar">
+            <div><dt>Education</dt><dd>Social Sciences · UNIFESP</dd></div>
+            <div><dt>Based in</dt><dd>São Paulo, Brazil</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPETÊNCIAS ============ -->
+    <section id="competencias" class="secao secao-amarela">
+      <div class="container">
+        <h2 class="revelar">What I do</h2>
+        <div class="cards">
+          <article class="card revelar">
+            <span class="icone">01</span>
+            <h3>Business intelligence</h3>
+            <p>I understand the demand, the context and what the business really needs, and turn that into data-driven solutions.</p>
+          </article>
+          <article class="card revelar">
+            <span class="icone">02</span>
+            <h3>Diagnosis and hypothesis testing</h3>
+            <p>I ask the right questions and analyze data with descriptive statistics, time series and breakdowns by territory and race, interpreting results in light of the social context to test hypotheses and support decisions.</p>
+          </article>
+          <article class="card revelar">
+            <span class="icone">03</span>
+            <h3>Innovation with data and AI</h3>
+            <p>I build technology solutions, from Power BI dashboards and Streamlit prototypes to AI-powered products.</p>
+          </article>
+          <article class="card revelar">
+            <span class="icone">04</span>
+            <h3>Data integration and storytelling</h3>
+            <p>I find and integrate data from different sources and turn analyses into clear narratives for decision-makers.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJETOS ============ -->
+    <section id="projetos" class="secao">
+      <div class="container">
+        <h2 class="revelar">Projects</h2>
+        <p class="intro-secao revelar">What I did, which tools I used and what difference it made.</p>
+        <div class="projetos">
+
+          <article class="projeto revelar" id="proj-superacao">
+            <div class="projeto-img"><img src="img/painel-superacao.jpg" alt="Home screen of the SuperAção SP Program management dashboard" loading="lazy"></div>
+            <div class="projeto-info">
+              <p class="tags">01 · São Paulo State Government · Social assistance</p>
+              <h3>SuperAção SP Program</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Built management dashboards in Power BI and Streamlit to track the program's implementation.</li><li>Built a monitoring portal in Streamlit that brings together, in one place, information from several areas of the implementation.</li><li>Designed monitoring metrics based on longitudinal studies and exploratory analyses of the program's data.</li><li>Analyzed the time series of the program's indicators, interpreting their evolution in light of the socio-historical context and implementation across territories.</li><li>Conducted technical studies that supported strategic decisions for the program, using descriptive statistics (mean, median and dispersion analysis) and outlier detection to identify values outside the expected pattern.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Streamlit</span><span>Python</span><span>pandas</span><span>Descriptive statistics</span><span>Time series</span><span>Outlier detection</span></dd>
+                <dt>Impact</dt>
+                <dd>An integrated view of the program's implementation, with evidence-based decisions and dashboards tailored to management's real needs.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-piaui">
+            <div class="projeto-img"><img src="img/observatorio-primeira-infancia.jpg" alt="Home screen of the Piauí Early Childhood Observatory" loading="lazy"></div>
+            <div class="projeto-info">
+              <p class="tags">02 · Piauí State Government · Early childhood</p>
+              <h3>Piauí Early Childhood Observatory</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Took part in business meetings to translate the client's needs into data and visualization requirements.</li><li>Based on the Nurturing Care Framework, which looks at child development holistically, brought together in a single Power BI view the main indicators of five areas: health, nutrition, education, social assistance and safety.</li><li>Built this integrated view even without a system connecting each area's databases, designing a navigation that lets users explore all areas in one place.</li><li>Proposed an early childhood vulnerability index that combines the five areas to identify the municipalities in Piauí where children face the worst outcomes across several dimensions at once.</li><li>Expanded the dashboard with new public data, such as vaccination coverage, collected through automated web scraping in Python: HTTP requests to official portals, HTML parsing with BeautifulSoup and standardization with pandas, producing indicators aligned with national benchmarks.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Python</span><span>Web scraping</span><span>BeautifulSoup</span><span>pandas</span><span>Composite index</span></dd>
+                <dt>Impact</dt>
+                <dd>A holistic view of child development in the state and a clear criterion for prioritizing the municipalities where children are most vulnerable.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-feminicidio">
+            <div class="projeto-img"><img src="img/observatorio-feminicidio.jpg" alt="Home screen of the Rio de Janeiro Femicide Observatory" loading="lazy"></div>
+            <div class="projeto-info">
+              <p class="tags">03 · Freelance · Rio de Janeiro State Government · Violence against women</p>
+              <h3>Rio de Janeiro Femicide Observatory</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Responsible for the platform's entire visualization layer: from storytelling to creating the charts and navigation buttons.</li><li>Designed the navigation around the concept of the critical path, guiding users through women's journey in the protection network, from support channels to the justice system.</li><li>Created the platform's measures and indicators, integrating public safety, health, social assistance and justice data.</li><li>Produced data analyses and indicator proposals structured as data storytelling.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>DAX</span><span>Data storytelling</span><span>Navigation design</span><span>Data integration</span></dd>
+                <dt>Impact</dt>
+                <dd>An evidence platform that connects different areas in a single narrative and supports managers and professionals in the protection network in decision-making.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-datapedia">
+            <div class="grafico" data-tipo="mapa" aria-hidden="true"></div>
+            <div class="projeto-info">
+              <p class="tags">04 · São Paulo State · Early childhood</p>
+              <h3>São Paulo Early Childhood Datapedia</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>The Datapedia grew out of São Paulo's state-wide early childhood diagnosis, with the goal of bringing together the indicators produced in one place and making them easy to consult and reuse.</li><li>Built rates, proportions and coverage measures from public databases, such as prenatal care visits and vaccination, and consolidated the indicators into interactive maps by municipality and region.</li><li>Analyzed the indicators' time series from 2010 to 2024 and the inequalities across territories and by race, interpreting the results in light of the state's socio-historical context.</li><li>Realized that all this material would be confined to a Word report and developed, as an extra deliverable, an HTML product that works as a browsable repository of the maps, charts and databases used.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Python</span><span>pandas</span><span>Folium</span><span>Plotly</span><span>GeoJSON</span><span>Time series</span><span>HTML/CSS</span></dd>
+                <dt>Impact</dt>
+                <dd>The diagnosis went beyond the document: the client gained an interactive, reusable collection of indicators and visualizations on early childhood in the state.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-protocolo">
+            <div class="grafico" data-tipo="area" aria-hidden="true"></div>
+            <div class="projeto-info">
+              <p class="tags">05 · São Paulo City Hall · Early childhood</p>
+              <h3>Integrated Protocol for Early Childhood Care</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Developed the monitoring dashboard for the Integrated Protocol for Early Childhood Care (Protocolo Integrado de Atenção à Primeiríssima Infância) training course, with a visual reading of its implementation.</li><li>Responsible for managing and analyzing the course data.</li><li>Responsible for the technical side of monitoring the Integrated Municipal Early Childhood Policy, leading the work with the departments that make up the policy, such as Education, Health, Social Assistance, Culture, Public Safety and Persons with Disabilities.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Data management</span><span>Data visualization</span><span>Cross-sector policy</span></dd>
+                <dt>Impact</dt>
+                <dd>Visual monitoring of the course and support for following up on a policy that depends on the joint work of several city departments.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-estagio">
+            <div class="grafico" data-tipo="linha" aria-hidden="true"></div>
+            <div class="projeto-info">
+              <p class="tags">06 · Instituto Península · Education · Innovation</p>
+              <h3>Mandatory Teaching Internship Monitoring</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Noticed that monitoring was done only in spreadsheets and proposed a dashboard as an innovation for the team.</li><li>Developed the monitoring dashboard for the mandatory teaching internship at national and state level, with visual data presentation.</li><li>Contributed to educational materials, such as the mandatory internship guide for the state of Maranhão.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Power BI</span><span>Data visualization</span><span>Educational materials</span></dd>
+                <dt>Impact</dt>
+                <dd>Monitoring moved from spreadsheets to a visual dashboard that is easier to interpret and use in decision-making.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-ia">
+            <div class="grafico" data-tipo="rede" aria-hidden="true"></div>
+            <div class="projeto-info">
+              <p class="tags">07 · Innovation · AI · Honorable mention</p>
+              <h3>AI for report standardization</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Was responsible for writing progress reports on contracted deliverables and identified the opportunity to standardize them with AI.</li><li>Extracted the metadata of these reports, from formatting and styles to topic structure, and consolidated the standard into a reference document.</li><li>Designed an AI web application in Streamlit, guided by this document: users would upload a report and receive the points that are within or outside the standard.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Generative AI</span><span>Streamlit</span><span>Metadata extraction</span><span>Document standardization</span></dd>
+                <dt>Impact</dt>
+                <dd>An innovation proposal to make report review faster and more consistent, recognized with an Honorable Mention.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-lakehouse">
+            <div class="grafico" data-tipo="camadas" aria-hidden="true"></div>
+            <div class="projeto-info">
+              <p class="tags">08 · Data engineering</p>
+              <h3>Data integration on a Lakehouse architecture</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd>Built dashboards on a layered data architecture, integrating databases from different sources.</dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Lakehouse</span><span>SQL</span><span>Power BI</span></dd>
+                <dt>Impact</dt>
+                <dd>Information from several sources organized in one place, with more reliability and speed for analysis.</dd>
+              </dl>
+            </div>
+          </article>
+
+          <article class="projeto revelar" id="proj-juventudes">
+            <div class="grafico" data-tipo="barras" aria-hidden="true"></div>
+            <div class="projeto-info">
+              <p class="tags">09 · UNIFESP · PIBID/CAPES · Education</p>
+              <h3>Youth and Brazil's New High School reform</h3>
+              <dl>
+                <dt>Role</dt>
+                <dd><ul class="atuacao"><li>Designed the survey applied to high school students in Guarulhos, writing each question based on the research's analytical goals.</li><li>Cleaned the data, conducted the exploratory analysis and built the research charts.</li><li>Presented the results and the students' perceptions at an academic conference.</li></ul></dd>
+                <dt>Tools</dt>
+                <dd class="ferramentas"><span>Survey design</span><span>Exploratory analysis</span><span>Data visualization</span><span>Social research</span></dd>
+                <dt>Impact</dt>
+                <dd>Evidence on how students experience the New High School reform (Novo Ensino Médio), brought to the academic debate through the voices of the young people themselves.</dd>
+              </dl>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRAJETÓRIA ============ -->
+    <section id="trajetoria" class="secao secao-creme">
+      <div class="container">
+        <h2 class="revelar">Experience</h2>
+        <ol class="linha-tempo">
+          <li class="revelar">
+            <span class="periodo">Data</span>
+            <div class="traj-corpo">
+              <h3>FGV Projetos</h3>
+              <p>Worked in the data team across the full project cycle: understanding client needs, diagnosis, cleaning and analyzing public and administrative data, designing indicators and delivering solutions, from Power BI and Streamlit dashboards to digital products and AI tools.</p>
+              <p class="traj-rotulo">Projects</p>
+              <ul class="traj-lista"><li><strong>SuperAção SP Program</strong>: management dashboards, a monitoring portal in Streamlit, time series and technical data studies.</li><li><strong>São Paulo state-wide early childhood diagnosis</strong>: indicator design, time series, breakdowns by territory and race, maps and the creation of the Datapedia.</li><li><strong>Piauí Early Childhood Observatory</strong>: dashboard integrated through the Nurturing Care Framework and a proposed vulnerability index.</li><li><strong>Payroll of public hospitals in Sergipe</strong>: data consistency and quality analysis, checking for inconsistencies, duplicates and missing data.</li><li><strong>AI for report standardization</strong>: innovation proposal recognized with an Honorable Mention.</li></ul>
+              <p class="traj-rotulo">Skills</p>
+              <div class="ferramentas"><span>Business intelligence</span><span>Power BI</span><span>Python</span><span>Streamlit</span><span>Descriptive statistics</span><span>Time series</span><span>Socio-historical analysis</span><span>Data quality</span><span>Maps and geodata</span><span>Applied AI</span></div>
+            </div>
+          </li>
+          <li class="revelar">
+            <span class="periodo">Freelance</span>
+            <div class="traj-corpo">
+              <h3>Rio de Janeiro Femicide Observatory</h3>
+              <p>Independent project in which I was responsible for the entire visualization layer of the data platform on violence against women in the state of Rio de Janeiro.</p>
+              <p class="traj-rotulo">Projects</p>
+              <ul class="traj-lista"><li><strong>Observatory data platform</strong>: storytelling, charts, navigation buttons, measures and indicators, organized around the critical path.</li></ul>
+              <p class="traj-rotulo">Skills</p>
+              <div class="ferramentas"><span>Power BI</span><span>DAX</span><span>Data storytelling</span><span>Navigation design</span><span>Indicators</span></div>
+            </div>
+          </li>
+          <li class="revelar">
+            <span class="periodo">Early childhood</span>
+            <div class="traj-corpo">
+              <h3>SEPE · São Paulo City Hall</h3>
+              <p>In the early childhood unit, I was responsible for the technical side of monitoring São Paulo's Integrated Municipal Early Childhood Policy and for managing and analyzing the data of the Integrated Protocol for Early Childhood Care training course.</p>
+              <p class="traj-rotulo">Projects</p>
+              <ul class="traj-lista"><li><strong>Integrated Protocol for Early Childhood Care course</strong>: development of the monitoring dashboard and management of the course data.</li><li><strong>Integrated Municipal Early Childhood Policy</strong>: responsible for the technical side of monitoring, leading the work with Education, Health, Social Assistance, Culture, Public Safety, Persons with Disabilities and other departments.</li></ul>
+              <p class="traj-rotulo">Skills</p>
+              <div class="ferramentas"><span>Power BI</span><span>Data management</span><span>Policy monitoring</span><span>Cross-sector policy</span></div>
+            </div>
+          </li>
+          <li class="revelar">
+            <span class="periodo">Education</span>
+            <div class="traj-corpo">
+              <h3>Instituto Península · Movimento Profissão Docente</h3>
+              <p>At Movimento Profissão Docente, an initiative focused on valuing and training teachers, I developed the monitoring of the mandatory teaching internship and worked with state education managers on indicators.</p>
+              <p class="traj-rotulo">Projects</p>
+              <ul class="traj-lista"><li><strong>Mandatory teaching internship monitoring dashboard</strong>: national and state-level monitoring, replacing spreadsheet-based tracking.</li><li><strong>Educational materials</strong>: contributed to the mandatory internship guide for the state of Maranhão.</li><li><strong>Relations with education networks</strong>: alignment with state managers on indicators.</li></ul>
+              <p class="traj-rotulo">Skills</p>
+              <div class="ferramentas"><span>Power BI</span><span>Education indicators</span><span>Educational materials</span><span>Stakeholder relations</span></div>
+            </div>
+          </li>
+          <li class="revelar">
+            <span class="periodo">2022 — 2024</span>
+            <div class="traj-corpo">
+              <h3>PIBID/CAPES Fellow · Sociology, UNIFESP</h3>
+              <p>As a fellow of the Institutional Program for Teaching Initiation Scholarships (PIBID), I taught Sociology at a public school in Guarulhos and carried out research with high school students, from survey design to data analysis and presenting the results at a conference.</p>
+              <p class="traj-rotulo">Projects</p>
+              <ul class="traj-lista"><li><strong>Youth and Brazil's New High School reform</strong>: survey design, exploratory analysis and conference presentation.</li></ul>
+              <p class="traj-rotulo">Skills</p>
+              <div class="ferramentas"><span>Survey design</span><span>Exploratory analysis</span><span>Data visualization</span><span>Social research</span><span>Scientific communication</span></div>
+            </div>
+          </li>
+          <li class="revelar">
+            <span class="periodo">Education</span>
+            <div class="traj-corpo">
+              <h3>Bachelor's and Teaching Degree in Social Sciences · UNIFESP</h3>
+              <p>My degree gave me the theoretical and methodological foundation that guides my work: social theory, research methods and social diagnosis. The teaching degree added didactics: bringing knowledge into practice and making it useful for those who will use it.</p>
+              <p class="traj-rotulo">Projects</p>
+              <ul class="traj-lista"><li><strong>Undergraduate thesis</strong>: research on ethnic-racial relations and representations in textbooks.</li></ul>
+              <p class="traj-rotulo">Skills</p>
+              <div class="ferramentas"><span>Social diagnosis</span><span>Qualitative research</span><span>Didactics</span><span>Problem framing</span></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ CONTATO ============ -->
+    <section id="contato" class="contato">
+      <div class="container">
+        <h2 class="revelar">Contact</h2>
+        <p class="revelar">To talk about projects, research or opportunities, you can find me through the channels below.</p>
+        <div class="acoes revelar">
+          <a href="mailto:mirella.alvino1@outlook.com" class="btn btn-amarelo">mirella.alvino1@outlook.com</a>
+          <a href="https://www.linkedin.com/in/mirellalvinobastos/" class="btn btn-claro" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/mialvino3-a11y" class="btn btn-claro" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>© <span id="ano">2026</span> Mirella Alvino · São Paulo, Brazil</p>
+  </footer>
+
+  <script src="efeitos.js"></script>
+</body>
+</html>
