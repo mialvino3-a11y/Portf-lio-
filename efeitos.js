@@ -39,13 +39,108 @@ document.addEventListener('click', (e) => {
 });
 
 // Gerador de números "aleatórios" sempre iguais para a mesma semente,
-// para o globo não mudar a cada visita
+// para os gráficos não mudarem a cada visita
 const sementeAleatoria = (semente) => () => {
   semente = (semente + 0x6D2B79F5) | 0;
   let t = Math.imul(semente ^ (semente >>> 15), 1 | semente);
   t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
   return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
 };
+
+// ============ GRÁFICOS DECORATIVOS DOS PROJETOS ============
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs) => {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+};
+const caminho = (pts) => pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+const L = 300, A = 130;
+
+const desenhos = {
+  linha(svg, r) {
+    [['traco', 0], ['traco-2', 1]].forEach(([classe, s]) => {
+      let y = 80 + s * 15;
+      const pts = Array.from({ length: 13 }, (_, i) => {
+        y = Math.max(20, Math.min(110, y - (s ? 2 : 5) + (r() - 0.5) * 22));
+        return [10 + i * 23.3, y];
+      });
+      svg.append(el('path', { d: caminho(pts), class: classe }));
+    });
+  },
+  area(svg, r) {
+    let y = 112;
+    const pts = Array.from({ length: 16 }, (_, i) => { y -= r() * 9; return [10 + i * 18.7, y]; });
+    svg.append(el('path', { d: `${caminho(pts)} L290,120 L10,120 Z`, class: 'preenche' }));
+    svg.append(el('path', { d: caminho(pts), class: 'traco' }));
+  },
+  barras(svg, r) {
+    const n = 12, larg = 280 / n;
+    const destaque = Math.floor(r() * n);
+    let soma = 0;
+    for (let i = 0; i < n; i++) {
+      const h = 25 + r() * 75;
+      soma += h;
+      svg.append(el('rect', {
+        x: 10 + i * larg + 3, y: 118 - h, width: larg - 6, height: h,
+        class: i === destaque ? 'barra-destaque' : 'barra',
+      }));
+    }
+    const media = 118 - soma / n;
+    svg.append(el('path', { d: `M8,${media} L292,${media}`, class: 'traco-2' }));
+  },
+  rede(svg, r) {
+    const nos = Array.from({ length: 16 }, () => [20 + r() * 260, 15 + r() * 100]);
+    nos.forEach((a, i) => nos.forEach((b, j) => {
+      if (j > i && Math.hypot(a[0] - b[0], a[1] - b[1]) < 70) {
+        svg.append(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: 'ligacao' }));
+      }
+    }));
+    nos.forEach((n, i) => svg.append(el('circle', { cx: n[0], cy: n[1], r: i % 5 ? 3 : 5, class: i % 5 ? 'ponto' : 'ponto-2' })));
+  },
+  mapa(svg, r) {
+    // mosaico hexagonal, como um mapa de municípios colorido por indicador
+    const raio = 11, w = Math.sqrt(3) * raio, classes = ['hex-0', 'hex-1', 'hex-2', 'hex-3'];
+    for (let lin = 0; lin < 9; lin++) {
+      for (let col = 0; col < 15; col++) {
+        const cx = 12 + col * w + (lin % 2 ? w / 2 : 0), cy = 10 + lin * raio * 1.5;
+        const dx = (cx - 150) / 140, dy = (cy - 65) / 60;
+        if (dx * dx + dy * dy > 1 + r() * 0.25) continue;   // recorte com contorno irregular
+        const pts = Array.from({ length: 6 }, (_, k) => {
+          const ang = (Math.PI / 3) * k + Math.PI / 6;
+          return `${(cx + raio * 0.92 * Math.cos(ang)).toFixed(1)},${(cy + raio * 0.92 * Math.sin(ang)).toFixed(1)}`;
+        }).join(' ');
+        const valor = Math.min(3, Math.floor(r() * 3.2 + (1 - Math.hypot(dx, dy)) * 1.2));
+        svg.append(el('polygon', { points: pts, class: `hex ${classes[valor]}` }));
+      }
+    }
+  },
+  camadas(svg) {
+    // dados brutos → tratados → prontos para análise
+    const colunas = [[50, 8], [150, 5], [250, 3]];
+    const pos = colunas.map(([x, n]) => Array.from({ length: n }, (_, i) => [x, 65 + (i - (n - 1) / 2) * 13]));
+    for (let c = 0; c < 2; c++) {
+      pos[c].forEach((a) => pos[c + 1].forEach((b) => {
+        svg.append(el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], class: 'ligacao' }));
+      }));
+    }
+    pos.forEach((col, c) => col.forEach(([x, y]) => {
+      svg.append(el('circle', { cx: x, cy: y, r: 4, class: c === 2 ? 'ponto-2' : 'ponto' }));
+    }));
+  },
+};
+
+document.querySelectorAll('.grafico').forEach((caixa, i) => {
+  const svg = el('svg', { viewBox: `0 0 ${L} ${A}`, preserveAspectRatio: 'xMidYMid slice' });
+  (desenhos[caixa.dataset.tipo] || desenhos.linha)(svg, sementeAleatoria(i + 7));
+  caixa.append(svg);
+  // prepara as linhas para serem "desenhadas" quando aparecerem
+  svg.querySelectorAll('.traco, .traco-2').forEach((p) => {
+    const comp = Math.ceil(p.getTotalLength());
+    if (p.classList.contains('traco')) p.style.strokeDasharray = comp;
+    p.style.setProperty('--comp', comp);
+  });
+});
 
 // ============ ELEMENTOS APARECENDO AO ROLAR ============
 if (!semAnimacao && 'IntersectionObserver' in window) {
@@ -55,6 +150,10 @@ if (!semAnimacao && 'IntersectionObserver' in window) {
       if (!e.isIntersecting) return;
       const alvo = e.target;
       observador.unobserve(alvo);
+      if (alvo.classList.contains('grafico')) {
+        alvo.classList.add('desenhado');
+        return;
+      }
       alvo.classList.add('visivel');
       // depois de aparecer, libera o elemento para os outros efeitos (como a inclinação)
       setTimeout(() => {
@@ -70,6 +169,7 @@ if (!semAnimacao && 'IntersectionObserver' in window) {
     alvo.style.transitionDelay = `${Math.min(irmaos.indexOf(alvo), 5) * 90}ms`;
     observador.observe(alvo);
   });
+  document.querySelectorAll('.grafico').forEach((g) => observador.observe(g));
   // garantia: se algo ainda estiver escondido depois de passar pela tela, mostra de qualquer jeito
   window.addEventListener('scroll', () => {
     document.querySelectorAll('.revelar:not(.visivel)').forEach((el) => {
@@ -322,8 +422,6 @@ if (temMouse && !semAnimacao) {
   // Cartões: inclinam em 3D seguindo o mouse, com a sombra acompanhando
   document.querySelectorAll('.projeto, .card').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
-      // dentro das demonstrações o cartão fica parado, para dar para clicar com calma
-      if (e.target.closest('.demo')) { card.classList.remove('inclinando'); return; }
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;   // -0.5 a 0.5
       const y = (e.clientY - r.top) / r.height - 0.5;
@@ -343,6 +441,7 @@ function destacarProjeto(hash) {
   if (!alvo || !alvo.classList.contains('projeto')) return;
   alvo.classList.remove('revelar');
   alvo.classList.add('visivel');
+  alvo.querySelectorAll('.grafico').forEach((g) => g.classList.add('desenhado'));
   alvo.classList.remove('destacado');
   void alvo.offsetWidth;   // reinicia a animação se clicar de novo
   alvo.classList.add('destacado');
